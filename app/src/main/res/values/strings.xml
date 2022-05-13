@@ -7,6 +7,8 @@
 
 
     <string name="admin_activity">Master Login</string>
+    <string name="teacher_activity">Teacher Login</string>
+    <string name="student_activity">Student Login</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
