@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">AttendanceTracker</string>
 
-    <string name="button2">Admin</string>
+    <string name="button2">Master</string>
     <string name="button">Teacher</string>
     <string name="button3">Student</string>
+
+
+    <string name="admin_activity">Master Login</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 
 </resources>
