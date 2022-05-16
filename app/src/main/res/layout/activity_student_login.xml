@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".StudentLogin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
@@ -80,5 +75,4 @@
 
             android:width="150dp"
             android:text="@string/login" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

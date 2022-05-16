@@ -6,80 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".TeacherLogin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="242dp"
-            android:maxWidth="10dp"
-            android:maxHeight="15dp"
-            app:srcCompat="@drawable/teacher_login" />
+        app:layout_constraintDimensionRatio="1:1.25"
+        app:layout_constraintEnd_toEndOf="@id/guideline7"
+        app:layout_constraintStart_toStartOf="@id/guideline6"
 
-        <EditText
-            android:id="@+id/editTextTextPersonName2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
+        app:srcCompat="@drawable/teacher_login"
+        tools:layout_editor_absoluteY="47dp" />
 
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
 
-            android:hint="@string/username"
-            android:text="" />
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:text=""
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:backgroundTint="@color/white"
-            android:background="?android:attr/listDivider" />
+        app:layout_constraintBottom_toTopOf="@id/editTextTextPassword2"
+        app:layout_constraintEnd_toEndOf="@id/guideline7"
+        app:layout_constraintStart_toStartOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintVertical_chainStyle="spread" />
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:backgroundTint="@color/white"
-            android:background="?android:attr/listDivider" />
+    <EditText
+        android:id="@+id/editTextTextPassword2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
 
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:backgroundTint="@color/white"
-            android:background="?android:attr/listDivider" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/button5"
+        app:layout_constraintEnd_toEndOf="@id/guideline7"
 
-        <EditText
-            android:id="@+id/editTextTextPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+        app:layout_constraintStart_toStartOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2" />
 
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
 
-            android:hint="@string/password"
-            android:inputType="textPassword" />
+        android:backgroundTint="@color/blue_button"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline7"
+        app:layout_constraintStart_toStartOf="@id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword2" />
 
-            android:backgroundTint="@color/blue_button"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".15" />
 
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            android:width="150dp"
-            android:text="@string/login" />
-
-    </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".85" />
 </androidx.constraintlayout.widget.ConstraintLayout>
