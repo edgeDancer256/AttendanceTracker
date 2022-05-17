@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329790519478",
+    "project_id": "attendance-tracker-402d7",
+    "storage_bucket": "attendance-tracker-402d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329790519478:android:989265db59c21ca88d4e17",
+        "android_client_info": {
+          "package_name": "com.nazgul.attendencetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329790519478-teg8n5d0njeqo8jpgm9cf240g7dtcmf0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdAVhzBuCLK5ifQ2K6A6eec7FVoKxd43o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329790519478-teg8n5d0njeqo8jpgm9cf240g7dtcmf0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
