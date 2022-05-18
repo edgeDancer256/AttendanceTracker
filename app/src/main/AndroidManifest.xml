@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nazgul.attendancetracker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,13 +17,16 @@
         android:theme="@style/Theme.AttendanceTracker"
         tools:targetApi="31">
         <activity
-            android:name=".StudentLogin"
-            android:label="@string/student_activity"
+            android:name=".AdminMenu"
             android:exported="false" />
         <activity
+            android:name=".StudentLogin"
+            android:exported="false"
+            android:label="@string/student_activity" />
+        <activity
             android:name=".TeacherLogin"
-            android:label="@string/teacher_activity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/teacher_activity" />
         <activity
             android:name=".AdminLogin"
             android:exported="false"
