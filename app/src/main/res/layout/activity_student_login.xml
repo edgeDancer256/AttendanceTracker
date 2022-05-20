@@ -7,20 +7,20 @@
     tools:context=".StudentLogin">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/studentImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         app:layout_constraintDimensionRatio="1:1.25"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline9"
-        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintEnd_toEndOf="@id/stdLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/stdLoginGld1"
 
         app:srcCompat="@drawable/student_login"
         tools:layout_editor_absoluteY="61dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/studentUsrName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,16 +29,16 @@
         android:inputType="textPersonName"
 
         android:text=""
-        app:layout_constraintBottom_toTopOf="@id/editTextTextPassword3"
+        app:layout_constraintBottom_toTopOf="@id/studentPassword"
 
-        app:layout_constraintEnd_toEndOf="@id/guideline9"
-        app:layout_constraintStart_toStartOf="@id/guideline8"
-        app:layout_constraintTop_toBottomOf="@id/imageView4"
+        app:layout_constraintEnd_toEndOf="@id/stdLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/stdLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/studentImage"
         app:layout_constraintVertical_chainStyle="spread" />
 
 
     <EditText
-        android:id="@+id/editTextTextPassword3"
+        android:id="@+id/studentPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -46,14 +46,14 @@
         android:hint="@string/password"
         android:inputType="textPassword"
 
-        app:layout_constraintBottom_toTopOf="@id/button6"
-        app:layout_constraintEnd_toEndOf="@id/guideline9"
+        app:layout_constraintBottom_toTopOf="@id/studentLogin"
+        app:layout_constraintEnd_toEndOf="@id/stdLoginGld2"
 
-        app:layout_constraintStart_toStartOf="@id/guideline8"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName3" />
+        app:layout_constraintStart_toStartOf="@id/stdLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/studentUsrName" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/studentLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue_button"
@@ -61,20 +61,20 @@
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintEnd_toEndOf="@id/guideline9"
-        app:layout_constraintStart_toStartOf="@id/guideline8"
+        app:layout_constraintEnd_toEndOf="@id/stdLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/stdLoginGld1"
 
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword3" />
+        app:layout_constraintTop_toBottomOf="@id/studentPassword" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
+        android:id="@+id/stdLoginGld1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
+        android:id="@+id/stdLoginGld2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

@@ -18,7 +18,7 @@ public class AdminMenu extends AppCompatActivity {
     private TextView t1;
 
     private static final String DATABASE_NAME = "teachers";
-    private static final String url = "jdbc:mysql://attendance-tracker-db.cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com" +
+    private static final String url = "jdbc:mysql://attendance-tracker-db.cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/" +
             DATABASE_NAME;
     private static final String username = "admin", password = "admin1234";
     private static final String TABLE_NAME = "bsc";
@@ -45,7 +45,7 @@ public class AdminMenu extends AppCompatActivity {
             StringBuilder rec = new StringBuilder();
 
             try {
-                Class.forName("com.mysql.jdbc.driver");
+                //Class.forName("com.mysql.jdbc.Driver");
                 Connection conn = DriverManager.getConnection(url,username, password);
                 Statement st = conn.createStatement();
 

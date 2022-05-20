@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.net.Inet4Address;
-
 public class MainActivity extends AppCompatActivity {
 
     Button admin_login;
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        admin_login = (Button) findViewById(R.id.button2);
+        admin_login = (Button) findViewById(R.id.masterBtn);
         admin_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        teacher_login = (Button) findViewById(R.id.button);
+        teacher_login = (Button) findViewById(R.id.teacherbtn);
         teacher_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        student_login = (Button) findViewById(R.id.button3);
+        student_login = (Button) findViewById(R.id.studentBtn);
         student_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

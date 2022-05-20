@@ -30,9 +30,9 @@ public class AdminLogin extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        email = (EditText) findViewById(R.id.editTextTextPersonName);
-        password = (EditText) findViewById(R.id.editTextTextPassword);
-        login = (Button) findViewById(R.id.button4);
+        email = (EditText) findViewById(R.id.adminUsrName);
+        password = (EditText) findViewById(R.id.adminPassword);
+        login = (Button) findViewById(R.id.adminLogin);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

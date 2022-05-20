@@ -7,19 +7,20 @@
     tools:context=".TeacherLogin">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/teacherImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         app:layout_constraintDimensionRatio="1:1.25"
-        app:layout_constraintEnd_toEndOf="@id/guideline7"
-        app:layout_constraintStart_toStartOf="@id/guideline6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
 
         app:srcCompat="@drawable/teacher_login"
         tools:layout_editor_absoluteY="47dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/teacherUsrName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,28 +29,28 @@
         android:inputType="textPersonName"
         android:text=""
 
-        app:layout_constraintBottom_toTopOf="@id/editTextTextPassword2"
-        app:layout_constraintEnd_toEndOf="@id/guideline7"
-        app:layout_constraintStart_toStartOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintBottom_toTopOf="@id/teacherPassword"
+        app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/teacherImage"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/teacherPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
 
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@id/button5"
-        app:layout_constraintEnd_toEndOf="@id/guideline7"
+        app:layout_constraintBottom_toTopOf="@id/teacherLogin"
+        app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
 
-        app:layout_constraintStart_toStartOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/teacherUsrName" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/teacherLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -57,19 +58,19 @@
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintEnd_toEndOf="@id/guideline7"
-        app:layout_constraintStart_toStartOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword2" />
+        app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/teacherPassword" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/teacherLoginGld1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/teacherLoginGld2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
