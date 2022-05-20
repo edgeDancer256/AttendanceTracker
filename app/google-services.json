@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:329790519478:android:989265db59c21ca88d4e17",
         "android_client_info": {
-          "package_name": "com.nazgul.attendencetracker"
+          "package_name": "com.nazgul.attendancetracker"
         }
       },
       "oauth_client": [

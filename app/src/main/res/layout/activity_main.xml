@@ -8,46 +8,47 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/mainImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1.5"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/mainGdl2"
+        app:layout_constraintStart_toStartOf="@id/mainGdl1"
         app:srcCompat="@drawable/login"
         tools:layout_editor_absoluteY="68dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/masterBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:backgroundTint="@color/blue_button"
 
         android:text="@string/button2"
-        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintBottom_toTopOf="@id/teacherbtn"
 
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="@id/mainGdl2"
+        app:layout_constraintStart_toStartOf="@id/mainGdl1"
+        app:layout_constraintTop_toBottomOf="@id/mainImage"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/teacherbtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:backgroundTint="@color/blue_button"
         android:text="@string/button"
 
-        app:layout_constraintBottom_toTopOf="@id/button3"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintBottom_toTopOf="@id/studentBtn"
+        app:layout_constraintEnd_toEndOf="@id/mainGdl2"
 
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/button2" />
+        app:layout_constraintStart_toStartOf="@id/mainGdl1"
+        app:layout_constraintTop_toBottomOf="@id/masterBtn" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/studentBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -55,19 +56,19 @@
         android:text="@string/button3"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/button" />
+        app:layout_constraintEnd_toEndOf="@id/mainGdl2"
+        app:layout_constraintStart_toStartOf="@id/mainGdl1"
+        app:layout_constraintTop_toBottomOf="@id/teacherbtn" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/mainGdl1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/mainGdl2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
