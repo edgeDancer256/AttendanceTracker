@@ -10,6 +10,9 @@
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_student_login.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_login.xml" value="0.1" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_admin_menu.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_layout.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_login.xml" value="0.18070652173913043" />
       </map>
     </option>
   </component>
