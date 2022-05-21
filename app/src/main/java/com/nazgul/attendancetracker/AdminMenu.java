@@ -17,11 +17,13 @@ public class AdminMenu extends AppCompatActivity {
 
     private TextView t1;
 
-    private static final String DATABASE_NAME = "teachers";
-    private static final String url = "jdbc:mysql://attendance-tracker-db.cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/" +
+    private static final String DATABASE_NAME = "trial";
+    /*private static final String url = "jdbc:mysql://attendance-tracker-db.cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/" +
+            DATABASE_NAME;*/
+    private static final String url = "jdbc:mysql://34.93.219.7/" +
             DATABASE_NAME;
-    private static final String username = "admin", password = "admin1234";
-    private static final String TABLE_NAME = "bsc";
+    private static final String username = "root", password = "root1234";
+    private static final String TABLE_NAME = "t1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
