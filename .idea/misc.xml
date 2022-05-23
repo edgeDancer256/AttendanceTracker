@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/home_icon_foreground.xml" value="0.197" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout-land/activity_main.xml" value="0.17063492063492064" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_admin_login.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_admin_menu.xml" value="0.1897644927536232" />
@@ -10,9 +11,14 @@
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_student_login.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_login.xml" value="0.1" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/bottom_nav.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_admin_menu.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_report.xml" value="0.17527173913043478" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_layout.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_login.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/toolbar.xml" value="0.2015625" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/menu/bottom_menu.xml" value="0.2015625" />
       </map>
     </option>
   </component>
