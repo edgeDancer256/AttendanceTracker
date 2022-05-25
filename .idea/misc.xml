@@ -3,14 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_admin_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_admin_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_student_login.xml" value="0.15172101449275363" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_student_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_teacher_login.xml" value="0.15172101449275363" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/activity_teacher_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/bottom_nav.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/fragment_student_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/layout/fragment_teacher_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Deepak/StudioProjects/AttendanceTracker/app/src/main/res/menu/top_menu.xml" value="0.253125" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/home_icon_foreground.xml" value="0.197" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout-land/activity_main.xml" value="0.17063492063492064" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_admin_login.xml" value="0.1" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_admin_menu.xml" value="0.1897644927536232" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_admin_menu2.xml" value="0.1" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_student_login.xml" value="0.1" />
-        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_login.xml" value="0.1" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.1431159420289855" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/bottom_nav.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_admin_menu.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_home.xml" value="0.1" />
