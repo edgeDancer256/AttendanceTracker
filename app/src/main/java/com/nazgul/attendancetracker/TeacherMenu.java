@@ -11,10 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.nazgul.attendancetracker.MasterFragments.Home;
-import com.nazgul.attendancetracker.MasterFragments.Notification;
-import com.nazgul.attendancetracker.MasterFragments.Profile;
-import com.nazgul.attendancetracker.MasterFragments.Report;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherHome;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherNotif;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherProfile;

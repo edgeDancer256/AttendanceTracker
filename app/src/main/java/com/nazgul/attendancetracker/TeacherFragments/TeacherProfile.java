@@ -1,5 +1,6 @@
 package com.nazgul.attendancetracker.TeacherFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.nazgul.attendancetracker.MainActivity;
+import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.R;
 
 /**
@@ -62,5 +66,18 @@ public class TeacherProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_teacher_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+
+        Button b1 = view.findViewById(R.id.logout_teach);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TeacherProfile.this.getActivity(), MainActivity.class));
+            }
+        });
     }
 }
