@@ -29,6 +29,8 @@
         android:hint="@string/username"
         android:inputType="textPersonName"
 
+        android:drawableLeft="@drawable/user_icon"
+
         android:text=""
         app:layout_constraintBottom_toTopOf="@id/adminPassword"
         app:layout_constraintEnd_toEndOf="@id/adminLoginGld2"
@@ -43,6 +45,8 @@
 
         android:ems="10"
         android:hint="@string/password"
+
+        android:drawableLeft="@drawable/pass_icon"
 
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@id/adminLogin"
