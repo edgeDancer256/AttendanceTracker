@@ -26,6 +26,8 @@
         android:ems="10"
         android:hint="@string/username"
 
+        android:drawableLeft="@drawable/user_icon"
+
         android:inputType="textPersonName"
 
         android:text=""
@@ -45,6 +47,8 @@
 
         android:hint="@string/password"
         android:inputType="textPassword"
+
+        android:drawableLeft="@drawable/pass_icon"
 
         app:layout_constraintBottom_toTopOf="@id/studentLogin"
         app:layout_constraintEnd_toEndOf="@id/stdLoginGld2"

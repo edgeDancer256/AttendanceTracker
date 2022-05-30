@@ -65,7 +65,14 @@ public class AdminLogin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                    if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                        startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                    } else {
+                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
+                        Toast.makeText(AdminLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 } else {
                     Toast.makeText(AdminLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }

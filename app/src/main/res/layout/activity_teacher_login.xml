@@ -12,9 +12,9 @@
         android:layout_height="0dp"
 
         app:layout_constraintDimensionRatio="1:1.25"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
         app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
+        app:layout_constraintTop_toTopOf="parent"
 
         app:srcCompat="@drawable/teacher_login"
         tools:layout_editor_absoluteY="47dp" />
@@ -23,17 +23,19 @@
         android:id="@+id/teacherUsrName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        android:text=""
 
         app:layout_constraintBottom_toTopOf="@id/teacherPassword"
         app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
         app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
         app:layout_constraintTop_toBottomOf="@id/teacherImage"
-        app:layout_constraintVertical_chainStyle="spread" />
+
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:text=""
+        android:drawableLeft="@drawable/user_icon"/>
+
+
 
     <EditText
         android:id="@+id/teacherPassword"
@@ -41,13 +43,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
 
+        android:drawableLeft="@drawable/pass_icon"
+
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@id/teacherLogin"
         app:layout_constraintEnd_toEndOf="@id/teacherLoginGld2"
-
-        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1"
-        app:layout_constraintTop_toBottomOf="@id/teacherUsrName" />
+        app:layout_constraintTop_toBottomOf="@id/teacherUsrName"
+        app:layout_constraintStart_toStartOf="@id/teacherLoginGld1" />
 
     <Button
         android:id="@+id/teacherLogin"
@@ -75,4 +78,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".85" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
