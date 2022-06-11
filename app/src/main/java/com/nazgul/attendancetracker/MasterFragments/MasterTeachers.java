@@ -1,66 +1,72 @@
 package com.nazgul.attendancetracker.MasterFragments;
 
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nazgul.attendancetracker.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MasterTeachers#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class MasterTeachers extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MasterTeachers() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MasterTeachers.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MasterTeachers newInstance(String param1, String param2) {
-        MasterTeachers fragment = new MasterTeachers();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private static final String url = "jdbc:mysql://192.168.0.105:3306/trial";
+    private static final String user = "lucifer";
+    private static final String pass = "lucifer";
+    TextView txtData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_master_teachers, container, false);
+        View v = inflater.inflate(R.layout.fragment_master_teachers, container, false);
+        txtData = v.findViewById(R.id.txtdata);
+        MySQLConn conn = new MySQLConn();
+        conn.execute("");
+        return v;
+    }
+
+
+    private class MySQLConn extends AsyncTask<String, Void, String> {
+        String res = "";
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url, user, pass);
+                String result = "Database Connected Successfully!!\n";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("select * from t1");
+
+                while(rs.next()) {
+                    result += rs.getString(1).toString() + " " + rs.getString(2).toString() + "\n";
+                }
+                res = result;
+                Log.d("tag", res);
+            } catch(Exception e) {
+                e.printStackTrace();
+                res = e.toString();
+            }
+            return res;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            txtData.setText(result);
+        }
     }
 }

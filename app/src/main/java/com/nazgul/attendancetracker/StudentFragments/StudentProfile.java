@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.nazgul.attendancetracker.MainActivity;
 import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.R;
@@ -20,6 +21,8 @@ import com.nazgul.attendancetracker.R;
  * create an instance of this fragment.
  */
 public class StudentProfile extends Fragment {
+
+    private FirebaseAuth mAuth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,6 +58,9 @@ public class StudentProfile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -76,6 +82,7 @@ public class StudentProfile extends Fragment {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 startActivity(new Intent(StudentProfile.this.getActivity(), MainActivity.class));
             }
         });
