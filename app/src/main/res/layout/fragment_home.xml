@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".MasterFragments.Home">
 
@@ -13,111 +13,106 @@
         android:layout_height="wrap_content">
 
         <!--Classes Card -->
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="40dp"
-            app:cardElevation="2dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toTopOf="@id/cardview2"
-
-            app:layout_constraintDimensionRatio="1.5:1"
+            app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread">
+            app:layout_constraintVertical_chainStyle="packed">
 
-            <ImageView
-                android:id="@+id/imgView1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_green"
+                android:orientation="vertical">
 
-                android:clickable="true"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Classes"
+                    android:textSize="30sp" />
 
-                android:src="@drawable/asset_bg_green"
-                app:layout_constraintEnd_toEndOf="@id/homeGld2"
-                app:layout_constraintStart_toStartOf="@id/homeGld1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Classes"
-                android:textSize="30sp" />
-        </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <!--Teachers Card -->
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="40dp"
-            app:cardElevation="2dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toTopOf="@id/cardview3"
 
-            app:layout_constraintDimensionRatio="1.5:1"
+            app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
             app:layout_constraintTop_toBottomOf="@id/cardview1">
 
-            <ImageView
-                android:id="@+id/imgView2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_paleblue"
+                android:orientation="vertical">
 
-                android:clickable="true"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Teachers"
+                    android:textSize="30sp" />
 
-                android:src="@drawable/asset_bg_paleblue"
-                app:layout_constraintEnd_toEndOf="@id/homeGld2"
-                app:layout_constraintStart_toStartOf="@id/homeGld1" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Teachers"
-                android:textSize="30sp" />
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
 
         <!--Students Card -->
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="40dp"
-            app:cardElevation="2dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="2:1"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
             app:layout_constraintTop_toBottomOf="@id/cardview2">
 
-            <ImageView
-                android:id="@+id/imgView3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_yellow"
+                android:orientation="vertical">
 
-                android:clickable="true"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Students"
+                    android:textSize="30sp" />
 
-                android:src="@drawable/asset_bg_yellow"
-                app:layout_constraintEnd_toEndOf="@id/homeGld2"
-                app:layout_constraintStart_toStartOf="@id/homeGld1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Students"
-                android:textSize="30sp" />
-        </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -125,13 +120,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".15" />
+            app:layout_constraintGuide_percent=".10" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/homeGld2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".85" />
+            app:layout_constraintGuide_percent=".90" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class TeacherLogin extends AppCompatActivity {
 
@@ -62,7 +65,14 @@ public class TeacherLogin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                    if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                        startActivity(new Intent(TeacherLogin.this, AdminMenu.class));
+                    } else {
+                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
+                        Toast.makeText(TeacherLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 } else {
                     Toast.makeText(TeacherLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }

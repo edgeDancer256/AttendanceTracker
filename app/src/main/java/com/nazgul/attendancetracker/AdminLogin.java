@@ -77,6 +77,7 @@ public class AdminLogin extends AppCompatActivity {
                     });
 
             startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+            finish();
         }
     }
 
@@ -103,6 +104,7 @@ public class AdminLogin extends AppCompatActivity {
 
 
                         startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                        finish();
                     } else {
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(AdminLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();

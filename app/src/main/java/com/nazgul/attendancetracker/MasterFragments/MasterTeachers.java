@@ -21,7 +21,8 @@ import java.sql.Statement;
 
 public class MasterTeachers extends Fragment {
 
-    private static final String url = "jdbc:mysql://192.168.0.105:3306/trial";
+    //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
+    private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
     private static final String user = "lucifer";
     private static final String pass = "lucifer";
     TextView txtData;
@@ -50,10 +51,10 @@ public class MasterTeachers extends Fragment {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 String result = "Database Connected Successfully!!\n";
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from t1");
+                ResultSet rs = st.executeQuery("select * from classes order by cName");
 
                 while(rs.next()) {
-                    result += rs.getString(1).toString() + " " + rs.getString(2).toString() + "\n";
+                    result += rs.getString(1).toString() + "  " + rs.getString(2).toString() + "  " + rs.getString(3).toString() + "\n";
                 }
                 res = result;
                 Log.d("tag", res);

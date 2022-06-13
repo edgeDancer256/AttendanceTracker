@@ -2,6 +2,7 @@ package com.nazgul.attendancetracker.MasterFragments;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,11 +26,11 @@ public class Home extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ImageView img = view.findViewById(R.id.imgView1);
-        img.setOnClickListener(new View.OnClickListener() {
+        CardView cd = view.findViewById(R.id.cardview1);
+        cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterTeachers()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterClasses()).commit();
                 Toast.makeText(getContext(), "yo", Toast.LENGTH_SHORT).show();
             }
         });

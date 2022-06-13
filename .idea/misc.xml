@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/home_icon_foreground.xml" value="0.197" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/plt1.xml" value="0.1705" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/round_corner_image.xml" value="0.1115" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/round_corner_img.xml" value="0.1115" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/drawable/user_icon_foreground.xml" value="0.1115" />
@@ -14,9 +15,11 @@
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_student_login.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_menu.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/bottom_nav.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_admin_menu.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_master_classes.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_master_teachers.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_profile.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_report.xml" value="0.17527173913043478" />

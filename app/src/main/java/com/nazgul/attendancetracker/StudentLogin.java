@@ -50,6 +50,7 @@ public class StudentLogin extends AppCompatActivity {
             if(currentUser != null) {
 
                 startActivity(new Intent(StudentLogin.this, StudentMenu.class));
+                finish();
             }
         }
 
@@ -62,6 +63,7 @@ public class StudentLogin extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
                         startActivity(new Intent(StudentLogin.this, StudentMenu.class));
+                        finish();
                     } else {
                         Toast.makeText(StudentLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                     }
