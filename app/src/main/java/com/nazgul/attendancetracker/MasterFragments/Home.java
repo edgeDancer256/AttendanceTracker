@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nazgul.attendancetracker.R;
 
+import java.util.Objects;
+
 
 public class Home extends Fragment {
 
@@ -30,8 +32,8 @@ public class Home extends Fragment {
         cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterClasses()).commit();
-                Toast.makeText(getContext(), "yo", Toast.LENGTH_SHORT).show();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterClasses()).addToBackStack("tag").commit();
+                Toast.makeText(getContext(), "✌✌", Toast.LENGTH_SHORT).show();
             }
         });
     }
