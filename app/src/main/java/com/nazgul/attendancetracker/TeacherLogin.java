@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 public class TeacherLogin extends AppCompatActivity {
 
@@ -25,6 +28,8 @@ public class TeacherLogin extends AppCompatActivity {
     private EditText password;
     private Button login;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,23 @@ public class TeacherLogin extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
 
-            startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+            fStore.collection("Users")
+                    .whereEqualTo("isTeacher", "0")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()) {
+                                for(QueryDocumentSnapshot doc : task.getResult()) {
+                                    if(doc.getId().equals(mAuth.getCurrentUser().getUid())) {
+                                        startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                                        finish();
+                                    }
+                                    Log.d("TAG", doc.getId() + doc.getData().toString());
+                                }
+                            }
+                        }
+                    });
         }
     }
 
@@ -65,8 +86,25 @@ public class TeacherLogin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                        startActivity(new Intent(TeacherLogin.this, AdminMenu.class));
+                    if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
+                        fStore.collection("Users")
+                                .whereEqualTo("isTeacher", "0")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()) {
+                                            for(QueryDocumentSnapshot doc : task.getResult()) {
+                                                if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
+                                                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(TeacherLogin.this, "No Access", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
                     } else {
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(TeacherLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();

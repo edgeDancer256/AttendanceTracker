@@ -181,6 +181,9 @@ public class MasterClasses extends Fragment {
                 txtData.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        
+
                         DispClicK(resSet.get_cID());
                     }
                 });

@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 public class AdminLogin extends AppCompatActivity {
 
     private EditText email;
@@ -70,14 +72,15 @@ public class AdminLogin extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()) {
                                 for(QueryDocumentSnapshot doc : task.getResult()) {
-                                    Log.d("TAG", doc.getData().toString());
+                                    if(doc.getId().equals(mAuth.getCurrentUser().getUid())) {
+                                        startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                                        finish();
+                                    }
+                                    Log.d("TAG", doc.getId() + doc.getData().toString());
                                 }
                             }
                         }
                     });
-
-            startActivity(new Intent(AdminLogin.this, AdminMenu.class));
-            finish();
         }
     }
 
@@ -89,28 +92,30 @@ public class AdminLogin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                    if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
 
-                        fStore.collection("Users").whereEqualTo("isAdmin", "0").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()) {
-                                    for(QueryDocumentSnapshot doc : task.getResult()) {
-                                        Log.d("TAG", doc.getData().toString());
+                        fStore.collection("Users")
+                                .whereEqualTo("isAdmin", "0")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()) {
+                                            for(QueryDocumentSnapshot doc : task.getResult()) {
+                                                if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
+                                                    startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(AdminLogin.this, "No Access", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        });
-
-
-                        startActivity(new Intent(AdminLogin.this, AdminMenu.class));
-                        finish();
+                                });
                     } else {
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(AdminLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
                     }
-
-
                 } else {
                     Toast.makeText(AdminLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }
