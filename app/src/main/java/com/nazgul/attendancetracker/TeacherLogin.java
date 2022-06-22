@@ -82,6 +82,8 @@ public class TeacherLogin extends AppCompatActivity {
 
         String pass = password.getText().toString();
 
+        Boolean[] flag = {false};
+
         mAuth.signInWithEmailAndPassword(emailID, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -96,15 +98,18 @@ public class TeacherLogin extends AppCompatActivity {
                                         if(task.isSuccessful()) {
                                             for(QueryDocumentSnapshot doc : task.getResult()) {
                                                 if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(TeacherLogin.this, "No Access", Toast.LENGTH_SHORT).show();
+                                                    flag[0] = true;
                                                 }
                                             }
                                         }
                                     }
                                 });
+                        if(flag[0]) {
+                            startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                            finish();
+                        } else {
+                            Toast.makeText(TeacherLogin.this, "No Access", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(TeacherLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();

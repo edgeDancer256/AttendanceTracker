@@ -109,9 +109,10 @@ public class MasterClasses extends Fragment {
     public class MySQLConn extends AsyncTask<String, Void, String> {
 
         //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
-        private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
-        private static final String user = "lucifer";
-        private static final String pass = "lucifer";
+        //private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
+        private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
+        private static final String user = "admin";
+        private static final String pass = "admin1234";
 
 
         @Override
