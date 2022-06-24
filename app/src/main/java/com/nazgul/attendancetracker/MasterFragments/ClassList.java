@@ -3,8 +3,10 @@ package com.nazgul.attendancetracker.MasterFragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClassList extends Fragment {
 
@@ -75,12 +78,12 @@ public class ClassList extends Fragment {
         assert this.getArguments() != null;
         String cName = this.getArguments().getString("cName");
         View v = inflater.inflate(R.layout.fragment_class_list, container, false);
+        Context context = container.getContext();
 
-
-        ll = v.findViewById(R.id.linlay1);
-        Context context = getContext();
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
+
+        ll = v.findViewById(R.id.linlay1);
 
         new ListDisp().execute(url, pass, user, cName);
         return v;
@@ -102,7 +105,7 @@ public class ClassList extends Fragment {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select cID, className, tID from classes where cName = " + cName);
+                ResultSet rs = st.executeQuery("select cID, className, tID from classes where cName = '" + cName + "'");
 
 
                 while (rs.next()) {
@@ -110,8 +113,8 @@ public class ClassList extends Fragment {
 
                     ClassList.ResSet resSet = new ClassList.ResSet();
                     resSet.set_cID(rs.getString(1));
-                    resSet.set_ClassName(rs.getString(1));
-                    resSet.set_tID(rs.getString(1));
+                    resSet.set_ClassName(rs.getString(2));
+                    resSet.set_tID(rs.getString(3));
 
 
                     resSetList.add(resSet);
@@ -126,6 +129,7 @@ public class ClassList extends Fragment {
             return res;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
             LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -140,7 +144,7 @@ public class ClassList extends Fragment {
                         "Class Name : " + resSet.get_tID() + "\n";
 
                 Log.d("tag", result);
-                CardView cv = new CardView(context);
+                CardView cv = new CardView(requireContext());
                 cv.setCardElevation(10);
                 cv.setLayoutParams(layparams);
                 cv.setRadius(30);

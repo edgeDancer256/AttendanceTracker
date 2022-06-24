@@ -42,8 +42,7 @@ public class MasterClasses extends Fragment {
     TextView txtData;
     LinearLayout ll;
     Context context;
-    List<ResSet> resSetList = new ArrayList<ResSet>();
-    List<Integer> idList = new ArrayList<Integer>();
+    List<MasterClasses.ResSet> resSetList = new ArrayList<ResSet>();
 
     public class ResSet {
         private String cID;
@@ -91,6 +90,7 @@ public class MasterClasses extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_master_classes, container, false);
         context = container.getContext();
+        v.refreshDrawableState();
 
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
@@ -102,9 +102,20 @@ public class MasterClasses extends Fragment {
         } else {
             new MySQLConn().execute("");
         }
-        //ll.removeAllViews();
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ll.removeAllViews();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ll.removeAllViews();
     }
 
     @Override
@@ -121,14 +132,9 @@ public class MasterClasses extends Fragment {
         private static final String user = "admin";
         private static final String pass = "admin1234";
 
-
         @Override
         protected String doInBackground(String... params) {
 
-            if(ll.getChildCount() > 0) {
-                ll.removeAllViews();
-            }
-            //ll.removeAllViews();
             String res = "";
             try {
                 String result = "";
@@ -139,7 +145,7 @@ public class MasterClasses extends Fragment {
 
 
                 while(rs.next()) {
-                    result += rs.getString(1) ;
+                    result += rs.getString(1);
 
                     ResSet resSet = new ResSet();
                     resSet.set_cName(rs.getString(1));
@@ -148,6 +154,7 @@ public class MasterClasses extends Fragment {
 
 
                 }
+                rs.close();
                 Log.d("tag", result);
                 res = result;
             } catch(Exception e) {
@@ -159,15 +166,12 @@ public class MasterClasses extends Fragment {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
+            ll.removeAllViews();
             Log.d("tag", resSetList.toString());
-            //ll.removeAllViews();
-
-
 
             LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             layparams.setMargins(20, 20, 20, 20);
-
 
             for(ResSet resSet : resSetList) {
 
@@ -176,10 +180,6 @@ public class MasterClasses extends Fragment {
 
                 Log.d("tag", result);
                 CardView cv = new CardView(context);
-                int i = View.generateViewId();
-                Log.d("tag", String.valueOf(i));
-                idList.add(i);
-                cv.setId(i);
                 cv.setCardElevation(10);
                 cv.setLayoutParams(layparams);
                 cv.setRadius(30);
@@ -215,6 +215,10 @@ public class MasterClasses extends Fragment {
 
                 ll.addView(cv);
             }
+
+            resSetList.clear();
+
+
         }
 
         private void DispClicK(String text) {
