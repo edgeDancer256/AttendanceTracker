@@ -96,7 +96,14 @@ public class MasterClasses extends Fragment {
         layparams.setMargins(10, 10, 10, 100);
 
         ll = v.findViewById(R.id.linlay1);
-        new MySQLConn().execute("");
+
+        if(ll.getChildCount() > 0) {
+            ll.removeAllViews();
+        } else {
+            new MySQLConn().execute("");
+        }
+        //ll.removeAllViews();
+
         return v;
     }
 
@@ -117,23 +124,25 @@ public class MasterClasses extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
+
+            if(ll.getChildCount() > 0) {
+                ll.removeAllViews();
+            }
+            //ll.removeAllViews();
             String res = "";
             try {
                 String result = "";
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from classes order by cName");
+                ResultSet rs = st.executeQuery("select distinct cName from classes");
 
 
                 while(rs.next()) {
-                    result += rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + rs.getString(4) + "\n";
+                    result += rs.getString(1) ;
 
                     ResSet resSet = new ResSet();
-                    resSet.set_cID(rs.getString(1));
-                    resSet.set_ClassName(rs.getString(2));
-                    resSet.set_cName(rs.getString(3));
-                    resSet.set_tID(rs.getString(4));
+                    resSet.set_cName(rs.getString(1));
 
                     resSetList.add(resSet);
 
@@ -151,6 +160,9 @@ public class MasterClasses extends Fragment {
         @Override
         protected void onPostExecute(String res) {
             Log.d("tag", resSetList.toString());
+            //ll.removeAllViews();
+
+
 
             LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -159,10 +171,9 @@ public class MasterClasses extends Fragment {
 
             for(ResSet resSet : resSetList) {
 
-                String result = "Class ID : " +  resSet.get_cID() + "\n" +
-                        "Class Name : " + resSet.get_ClassName() + "\n" +
-                        "Course Name : " + resSet.get_cName() + "\n" +
-                        "Teacher ID : " + resSet.get_tID();
+
+                String result = "Course Name : " + resSet.get_cName() + "\n";
+
                 Log.d("tag", result);
                 CardView cv = new CardView(context);
                 int i = View.generateViewId();
@@ -183,9 +194,15 @@ public class MasterClasses extends Fragment {
                     @Override
                     public void onClick(View view) {
 
-                        
+                        Bundle bundle = new Bundle();
+                        String cName = resSet.get_cName();
+                        bundle.putString("cName", cName);
+                        ClassList cl = new ClassList();
+                        cl.setArguments(bundle);
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cl).addToBackStack("tag").commit();
 
-                        DispClicK(resSet.get_cID());
+
+                        DispClicK(resSet.get_cName());
                     }
                 });
                 txtData.setText(result);
