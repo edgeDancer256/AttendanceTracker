@@ -38,48 +38,25 @@ import java.util.List;
 
 public class MasterClasses extends Fragment {
 
+    //IS to be checked later!!!
     ImageButton item_delete;
+    //Views and Layouts
     TextView txtData;
     LinearLayout ll;
     Context context;
+    //List to contain results from DB query
     List<MasterClasses.ResSet> resSetList = new ArrayList<ResSet>();
 
+    //Object Type for the result list
     public class ResSet {
-        private String cID;
-        private String className;
         private String cName;
-        private String tID;
-
-        private void set_cID(String cID) {
-            this.cID = cID;
-        }
-
-        private void set_ClassName(String className) {
-            this.className = className;
-        }
 
         private void set_cName(String cName) {
             this.cName = cName;
         }
 
-        private void set_tID(String tID) {
-            this.tID = tID;
-        }
-
-        private String get_cID() {
-            return this.cID;
-        }
-
-        private String get_ClassName() {
-            return this.className;
-        }
-
         private String get_cName() {
             return this.cName;
-        }
-
-        private String get_tID() {
-            return this.tID;
         }
     }
 
@@ -92,14 +69,17 @@ public class MasterClasses extends Fragment {
         context = container.getContext();
         v.refreshDrawableState();
 
+        //Check Later!!!!!
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
 
+        //Init Layout
         ll = v.findViewById(R.id.linlay1);
 
         if(ll.getChildCount() > 0) {
             ll.removeAllViews();
         } else {
+            //Execute the Async Method
             new MySQLConn().execute("");
         }
 
@@ -124,11 +104,14 @@ public class MasterClasses extends Fragment {
     }
 
 
+    //The Async Method to access DB and query records
     public class MySQLConn extends AsyncTask<String, Void, String> {
 
         //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
         //private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
+        //URL for the DB instance
         private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
+        //User Credentials
         private static final String user = "admin";
         private static final String pass = "admin1234";
 
@@ -138,6 +121,8 @@ public class MasterClasses extends Fragment {
             String res = "";
             try {
                 String result = "";
+
+                //Trying the connection and storing result
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 Statement st = con.createStatement();
@@ -166,6 +151,8 @@ public class MasterClasses extends Fragment {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
+
+            //Update UI according to result set
             ll.removeAllViews();
             Log.d("tag", resSetList.toString());
 
@@ -194,35 +181,29 @@ public class MasterClasses extends Fragment {
                     @Override
                     public void onClick(View view) {
 
+                        //To update fragment according to Course Name
                         Bundle bundle = new Bundle();
                         String cName = resSet.get_cName();
                         bundle.putString("cName", cName);
                         ClassList cl = new ClassList();
                         cl.setArguments(bundle);
-                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cl).addToBackStack("tag").commit();
-
-
-                        DispClicK(resSet.get_cName());
+                        requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, cl)
+                                .addToBackStack("tag")
+                                .commit();
                     }
                 });
                 txtData.setText(result);
                 txtData.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                 txtData.setTextColor(Color.BLACK);
 
-
+                //Adding the card view to the UI
                 cv.addView(txtData);
-                //cv.addView(item_delete);
-
                 ll.addView(cv);
             }
-
             resSetList.clear();
-
-
-        }
-
-        private void DispClicK(String text) {
-            Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
         }
     }
 }

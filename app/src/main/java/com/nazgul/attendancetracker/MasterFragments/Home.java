@@ -28,10 +28,12 @@ public class Home extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //Handle click for Classes Card
         CardView cd = view.findViewById(R.id.cardview1);
         cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Send to MasterClasses
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterClasses()).addToBackStack("tag").commit();
                 Toast.makeText(getContext(), "✌✌", Toast.LENGTH_SHORT).show();
             }

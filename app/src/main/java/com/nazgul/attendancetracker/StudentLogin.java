@@ -24,10 +24,14 @@ import java.util.Objects;
 
 public class StudentLogin extends AppCompatActivity {
 
+    //TextViews of Username and Password
     private EditText email;
     private EditText password;
+    //Login button
     private Button login;
+    //FirebaseAuth instance
     private FirebaseAuth mAuth;
+    //Firestore instance
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
 
@@ -36,8 +40,10 @@ public class StudentLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
+        //Init FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
+        //Init Views
         email = (EditText) findViewById(R.id.studentUsrName);
         password = (EditText) findViewById(R.id.studentPassword);
         login = (Button) findViewById(R.id.studentLogin);
@@ -54,6 +60,7 @@ public class StudentLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //Check if user is already logged in. If yes, don't show login screen again
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
 
@@ -78,15 +85,18 @@ public class StudentLogin extends AppCompatActivity {
     }
 
     private void signIn() {
+        //Retrieve Values of email and password
         String emailID = email.getText().toString();
         String pass = password.getText().toString();
 
+        //Call Sign In method
         mAuth.signInWithEmailAndPassword(emailID, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
+                    //Check Email Verification
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
-
+                        //If email verified, check access level
                         fStore.collection("Users")
                                 .whereEqualTo("isStudent", "0")
                                 .get()
@@ -94,6 +104,7 @@ public class StudentLogin extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()) {
+                                            //If access OK, Send to Menu
                                             for(QueryDocumentSnapshot doc : task.getResult()) {
                                                 if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
                                                     startActivity(new Intent(StudentLogin.this, StudentMenu.class));
@@ -106,6 +117,7 @@ public class StudentLogin extends AppCompatActivity {
                                     }
                                 });
                     } else {
+                        //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(StudentLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
                     }

@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,14 +31,17 @@ import java.util.Objects;
 
 public class ClassList extends Fragment {
 
-
+    //Credentials for server access
     private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
     private static final String user = "admin";
     private static final String pass = "admin1234";
 
+    //Views needed
     TextView txtData;
     LinearLayout ll;
+    ImageButton imgDelete;
     Context context;
+    //List of the result rows
     List<ClassList.ResSet> resSetList = new ArrayList<ClassList.ResSet>();
 
     public class ResSet {
@@ -75,26 +79,26 @@ public class ClassList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        //Asserting existence of arguments and retrieving them
         assert this.getArguments() != null;
         String cName = this.getArguments().getString("cName");
+
         View v = inflater.inflate(R.layout.fragment_class_list, container, false);
         Context context = container.getContext();
 
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
 
+        //Linear Layout
         ll = v.findViewById(R.id.linlay1);
 
+        //Call to Async method to query DB
         new ListDisp().execute(url, pass, user, cName);
         return v;
     }
 
     public class ListDisp extends AsyncTask<String, Void, String> {
-
-        //private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
-        //private static final String user = "admin";
-        //private static final String pass = "admin1234";
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -102,13 +106,15 @@ public class ClassList extends Fragment {
             String cName = params[3];
             try {
                 String result = "";
+
+                //Try connection and store result
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select cID, className, tID from classes where cName = '" + cName + "'");
 
 
-                while (rs.next()) {
+                while(rs.next()) {
                     result += rs.getString(1);
 
                     ClassList.ResSet resSet = new ClassList.ResSet();
@@ -121,9 +127,10 @@ public class ClassList extends Fragment {
 
 
                 }
+                rs.close();
                 Log.d("tag", result);
                 res = result;
-            } catch (Exception e) {
+            } catch(Exception e) {
                 e.printStackTrace();
             }
             return res;
@@ -137,11 +144,11 @@ public class ClassList extends Fragment {
             layparams.setMargins(20, 20, 20, 20);
 
 
-            for (ClassList.ResSet resSet : resSetList) {
+            for(ClassList.ResSet resSet : resSetList) {
 
-                String result = "Class Name : " + resSet.get_cID() + "\n" +
+                String result = "Class ID : " + resSet.get_cID() + "\n" +
                         "Class Name : " + resSet.get_ClassName() + "\n" +
-                        "Class Name : " + resSet.get_tID() + "\n";
+                        "Teacher ID : " + resSet.get_tID();
 
                 Log.d("tag", result);
                 CardView cv = new CardView(requireContext());
@@ -151,17 +158,29 @@ public class ClassList extends Fragment {
                 cv.setUseCompatPadding(true);
 
 
+                LinearLayout ll1 = new LinearLayout(getContext());
+                ll1.setOrientation(LinearLayout.HORIZONTAL);
+
+
                 txtData = new TextView(cv.getContext());
                 txtData.setLayoutParams(layparams);
-
                 txtData.setClickable(true);
                 txtData.setText(result);
                 txtData.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                 txtData.setTextColor(Color.BLACK);
 
+                imgDelete = new ImageButton(cv.getContext());
+                imgDelete.setImageResource(R.drawable.ic_delete);
+                imgDelete.setLayoutParams(layparams);
 
-                cv.addView(txtData);
-                //cv.addView(item_delete);
+
+
+
+                //Adding the views to the UI
+                ll1.addView(txtData);
+                ll1.addView(imgDelete);
+
+                cv.addView(ll1);
 
                 ll.addView(cv);
 
