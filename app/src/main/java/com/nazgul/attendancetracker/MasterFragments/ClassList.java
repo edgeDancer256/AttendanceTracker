@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.util.TypedValue;
@@ -19,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nazgul.attendancetracker.ClassInfoAdapter;
+import com.nazgul.attendancetracker.ClassInfoCard;
 import com.nazgul.attendancetracker.R;
 
 import java.sql.Connection;
@@ -41,7 +45,13 @@ public class ClassList extends Fragment {
     LinearLayout ll;
     ImageButton imgDelete;
     Context context;
+
+    RecyclerView recView;
+    RecyclerView.Adapter recAdapter;
+    RecyclerView.LayoutManager recLayout;
+
     //List of the result rows
+    ArrayList<ClassInfoCard> classInfoCards = new ArrayList<>();
     List<ClassList.ResSet> resSetList = new ArrayList<ClassList.ResSet>();
 
     public class ResSet {
@@ -90,8 +100,8 @@ public class ClassList extends Fragment {
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
 
-        //Linear Layout
-        ll = v.findViewById(R.id.linlay1);
+        recView = v.findViewById(R.id.recycle1);
+        recLayout = new LinearLayoutManager(getContext());
 
         //Call to Async method to query DB
         new ListDisp().execute(url, pass, user, cName);
@@ -150,41 +160,13 @@ public class ClassList extends Fragment {
                         "Class Name : " + resSet.get_ClassName() + "\n" +
                         "Teacher ID : " + resSet.get_tID();
 
-                Log.d("tag", result);
-                CardView cv = new CardView(requireContext());
-                cv.setCardElevation(10);
-                cv.setLayoutParams(layparams);
-                cv.setRadius(30);
-                cv.setUseCompatPadding(true);
 
 
-                LinearLayout ll1 = new LinearLayout(getContext());
-                ll1.setOrientation(LinearLayout.HORIZONTAL);
-
-
-                txtData = new TextView(cv.getContext());
-                txtData.setLayoutParams(layparams);
-                txtData.setClickable(true);
-                txtData.setText(result);
-                txtData.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-                txtData.setTextColor(Color.BLACK);
-
-                imgDelete = new ImageButton(cv.getContext());
-                imgDelete.setImageResource(R.drawable.ic_delete);
-                imgDelete.setLayoutParams(layparams);
-
-
-
-
-                //Adding the views to the UI
-                ll1.addView(txtData);
-                ll1.addView(imgDelete);
-
-                cv.addView(ll1);
-
-                ll.addView(cv);
-
+                classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, result, resSet.get_cID()));
             }
+            recAdapter = new ClassInfoAdapter(classInfoCards);
+            recView.setLayoutManager(recLayout);
+            recView.setAdapter(recAdapter);
         }
     }
 }
