@@ -107,13 +107,13 @@ public class MasterClasses extends Fragment {
     //The Async Method to access DB and query records
     public class MySQLConn extends AsyncTask<String, Void, String> {
 
-        //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
-        //private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
         //URL for the DB instance
-        private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
+        //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
+        private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
+
         //User Credentials
-        private static final String user = "admin";
-        private static final String pass = "admin1234";
+        private static final String user = "lucifer";
+        private static final String pass = "lucifer";
 
         @Override
         protected String doInBackground(String... params) {

@@ -1,5 +1,6 @@
 package com.nazgul.attendancetracker.MasterFragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -36,9 +37,10 @@ import java.util.Objects;
 public class ClassList extends Fragment {
 
     //Credentials for server access
-    private static final String url = "jdbc:mysql://database-1.cluster-cqqwgqkmnmfd.ap-south-1.rds.amazonaws.com/mainData";
-    private static final String user = "admin";
-    private static final String pass = "admin1234";
+    //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
+    private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
+    private static final String user = "lucifer";
+    private static final String pass = "lucifer";
 
     //Views needed
     TextView txtData;
@@ -146,6 +148,7 @@ public class ClassList extends Fragment {
             return res;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
@@ -161,12 +164,13 @@ public class ClassList extends Fragment {
                         "Teacher ID : " + resSet.get_tID();
 
 
-
                 classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, result, resSet.get_cID()));
             }
             recAdapter = new ClassInfoAdapter(classInfoCards);
             recView.setLayoutManager(recLayout);
             recView.setAdapter(recAdapter);
+            recAdapter.notifyDataSetChanged();
         }
     }
+
 }

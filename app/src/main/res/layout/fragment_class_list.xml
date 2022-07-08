@@ -14,7 +14,17 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:padding="4dp"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
+        />
+
+    <Button
+        android:id="@+id/add_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_class"
+        android:layout_alignParentBottom="true"
+        android:padding="14dp"
+        android:layout_margin="40dp"
         />
 
 </RelativeLayout>
