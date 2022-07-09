@@ -38,49 +38,25 @@ import java.util.List;
 
 public class MasterClasses extends Fragment {
 
+    //IS to be checked later!!!
     ImageButton item_delete;
+    //Views and Layouts
     TextView txtData;
     LinearLayout ll;
     Context context;
-    List<ResSet> resSetList = new ArrayList<ResSet>();
-    List<Integer> idList = new ArrayList<Integer>();
+    //List to contain results from DB query
+    List<MasterClasses.ResSet> resSetList = new ArrayList<ResSet>();
 
+    //Object Type for the result list
     public class ResSet {
-        private String cID;
-        private String className;
         private String cName;
-        private String tID;
-
-        private void set_cID(String cID) {
-            this.cID = cID;
-        }
-
-        private void set_ClassName(String className) {
-            this.className = className;
-        }
 
         private void set_cName(String cName) {
             this.cName = cName;
         }
 
-        private void set_tID(String tID) {
-            this.tID = tID;
-        }
-
-        private String get_cID() {
-            return this.cID;
-        }
-
-        private String get_ClassName() {
-            return this.className;
-        }
-
         private String get_cName() {
             return this.cName;
-        }
-
-        private String get_tID() {
-            return this.tID;
         }
     }
 
@@ -91,13 +67,35 @@ public class MasterClasses extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_master_classes, container, false);
         context = container.getContext();
+        v.refreshDrawableState();
 
+        //Check Later!!!!!
         LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
         layparams.setMargins(10, 10, 10, 100);
 
+        //Init Layout
         ll = v.findViewById(R.id.linlay1);
-        new MySQLConn().execute("");
+
+        if(ll.getChildCount() > 0) {
+            ll.removeAllViews();
+        } else {
+            //Execute the Async Method
+            new MySQLConn().execute("");
+        }
+
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ll.removeAllViews();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ll.removeAllViews();
     }
 
     @Override
@@ -106,38 +104,42 @@ public class MasterClasses extends Fragment {
     }
 
 
+    //The Async Method to access DB and query records
     public class MySQLConn extends AsyncTask<String, Void, String> {
 
+        //URL for the DB instance
         //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
         private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
+
+        //User Credentials
         private static final String user = "lucifer";
         private static final String pass = "lucifer";
 
-
         @Override
         protected String doInBackground(String... params) {
+
             String res = "";
             try {
                 String result = "";
+
+                //Trying the connection and storing result
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from classes order by cName");
+                ResultSet rs = st.executeQuery("select distinct cName from classes");
 
 
                 while(rs.next()) {
-                    result += rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + rs.getString(4) + "\n";
+                    result += rs.getString(1);
 
                     ResSet resSet = new ResSet();
-                    resSet.set_cID(rs.getString(1));
-                    resSet.set_ClassName(rs.getString(2));
-                    resSet.set_cName(rs.getString(3));
-                    resSet.set_tID(rs.getString(4));
+                    resSet.set_cName(rs.getString(1));
 
                     resSetList.add(resSet);
 
 
                 }
+                rs.close();
                 Log.d("tag", result);
                 res = result;
             } catch(Exception e) {
@@ -149,25 +151,22 @@ public class MasterClasses extends Fragment {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
+
+            //Update UI according to result set
+            ll.removeAllViews();
             Log.d("tag", resSetList.toString());
 
             LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             layparams.setMargins(20, 20, 20, 20);
 
-
             for(ResSet resSet : resSetList) {
 
-                String result = "Class ID : " +  resSet.get_cID() + "\n" +
-                        "Class Name : " + resSet.get_ClassName() + "\n" +
-                        "Course Name : " + resSet.get_cName() + "\n" +
-                        "Teacher ID : " + resSet.get_tID();
+
+                String result = "Course Name : " + resSet.get_cName() + "\n";
+
                 Log.d("tag", result);
                 CardView cv = new CardView(context);
-                int i = View.generateViewId();
-                Log.d("tag", String.valueOf(i));
-                idList.add(i);
-                cv.setId(i);
                 cv.setCardElevation(10);
                 cv.setLayoutParams(layparams);
                 cv.setRadius(30);
@@ -181,23 +180,30 @@ public class MasterClasses extends Fragment {
                 txtData.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DispClicK(resSet.get_cID());
+
+                        //To update fragment according to Course Name
+                        Bundle bundle = new Bundle();
+                        String cName = resSet.get_cName();
+                        bundle.putString("cName", cName);
+                        ClassList cl = new ClassList();
+                        cl.setArguments(bundle);
+                        requireActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, cl)
+                                .addToBackStack("tag")
+                                .commit();
                     }
                 });
                 txtData.setText(result);
                 txtData.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                 txtData.setTextColor(Color.BLACK);
 
-
+                //Adding the card view to the UI
                 cv.addView(txtData);
-                //cv.addView(item_delete);
-
                 ll.addView(cv);
             }
-        }
-
-        private void DispClicK(String text) {
-            Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+            resSetList.clear();
         }
     }
 }

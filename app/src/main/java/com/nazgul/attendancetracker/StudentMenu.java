@@ -22,37 +22,45 @@ import com.nazgul.attendancetracker.StudentFragments.StudentReport;
 
 public class StudentMenu extends AppCompatActivity {
 
+    //Bottom nav bar
     private BottomNavigationView bottomNavigationView;
+    //Fragment to be displayed
     private Fragment selectFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_menu);
 
+        //Init bottom nav bar
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
+        //Item select listener for the bottom nav bar
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
                     case R.id.nav_home:
+                        //Home fragment
                         selectFragment = new StudentHome();
                         break;
                     case R.id.nav_report:
+                        //Report fragment
                         selectFragment = new StudentReport();
                         break;
                     case R.id.nav_notif:
+                        //Notification fragment
                         selectFragment = new StudentNotif();
                         break;
                     case R.id.nav_profile:
+                        //Profile fragment
                         selectFragment = new StudentProfile();
                         break;
                 }
 
                 if(selectFragment != null) {
+                    //Inflate selected fragment
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
                 }
 
@@ -60,8 +68,10 @@ public class StudentMenu extends AppCompatActivity {
             }
         });
 
+        //Load home fragment by default
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StudentHome()).commit();
 
+        //TO BE CHECKED LATER!!!!!!!!!!!!
         bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
