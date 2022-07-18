@@ -29,13 +29,31 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //Handle click for Classes Card
-        CardView cd = view.findViewById(R.id.cardview1);
+        CardView cd = view.findViewById(R.id.cardview_home1);
         cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Send to MasterClasses
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MasterClasses()).addToBackStack("tag").commit();
-                Toast.makeText(getContext(), "✌✌", Toast.LENGTH_SHORT).show();
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new MasterClasses())
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        CardView cd1 = view.findViewById(R.id.cardview_home4);
+        cd1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Send to MasterClasses
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new PHPTest())
+                        .addToBackStack("tag")
+                        .commit();
             }
         });
     }
