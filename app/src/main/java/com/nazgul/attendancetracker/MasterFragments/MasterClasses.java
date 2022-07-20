@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -54,5 +55,125 @@ public class MasterClasses extends Fragment {
 
 
         return v;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        //MSc
+        CardView cd = view.findViewById(R.id.course_card1);
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Send to MSC List
+
+                Bundle bundle = new Bundle();
+                bundle.putString("course", "MSC");
+
+                ClassList cl = new ClassList();
+                cl.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, cl)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        //BSC
+        cd = view.findViewById(R.id.course_card2);
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Send to MSC List
+
+                Bundle bundle = new Bundle();
+                bundle.putString("course", "BSC");
+
+                ClassList cl = new ClassList();
+                cl.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, cl)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        //BCOM
+        cd = view.findViewById(R.id.course_card3);
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Send to MSC List
+
+                Bundle bundle = new Bundle();
+                bundle.putString("course", "BCOM");
+
+                ClassList cl = new ClassList();
+                cl.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, cl)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        //BCA
+        cd = view.findViewById(R.id.course_card4);
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Send to MSC List
+
+                Bundle bundle = new Bundle();
+                bundle.putString("course", "BCA");
+
+                ClassList cl = new ClassList();
+                cl.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, cl)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        //BA
+        cd = view.findViewById(R.id.course_card5);
+        cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Send to MSC List
+
+                Bundle bundle = new Bundle();
+                bundle.putString("course", "BA");
+
+                ClassList cl = new ClassList();
+                cl.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, cl)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
     }
 }

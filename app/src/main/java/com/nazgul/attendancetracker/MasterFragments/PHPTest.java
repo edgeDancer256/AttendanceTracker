@@ -66,7 +66,7 @@ public class PHPTest extends Fragment {
                     Log.d("tag", sb.toString());
                 }
                 br.close();
-
+                httpURLConnection.disconnect();
                 return sb.toString();
 
 

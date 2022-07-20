@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.MasterFragments.ClassList;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,10 +28,9 @@ import java.util.ArrayList;
 
 public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.ClassInfoViewHolder> {
 
-    //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
-    private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
-    private static final String user = "lucifer";
-    private static final String pass = "lucifer";
+    //Credentials for server access
+    //private static final String url = "http://192.168.0.105/att_tracker/delete_class.php";
+    private static final String url = "http://192.168.0.140/att_tracker/delete_class.php";
 
     private ArrayList<ClassInfoCard> classInfoCardArrayList;
 
@@ -70,7 +73,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                new DeleteEntry().execute(url, user, pass, currItem.getClass_id());
+                                new DeleteEntry().execute(url, currItem.getClass_id());
                                 Toast.makeText(view.getContext(), "Clicked " + currItem.getClass_id(), Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -89,20 +92,30 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
     private class DeleteEntry extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            String cID = params[3];
+            String cID = params[1];
 
             try {
-                String result = "";
-
                 //Try connection and store result
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url, user, pass);
-                Statement st = con.createStatement();
-                st.executeUpdate("delete from classes where cID = '" + cID + "'");
+                String query = "?class_id="+cID;
+                URL url = new URL(params[0] + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
+
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                    Log.d("tag", sb.toString());
+                }
+                br.close();
+                httpURLConnection.disconnect();
+                return sb.toString();
+
+
             } catch(Exception e) {
-                Log.d("tag", e.toString());
+                Log.d("err", e.toString());
+                return e.getMessage();
             }
-            return null;
         }
     }
 }
