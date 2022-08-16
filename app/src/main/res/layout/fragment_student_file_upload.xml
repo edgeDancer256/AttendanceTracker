@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentFragments.StudentFileUpload">
+
+    <ImageView
+        android:id="@+id/fileAdd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/adminLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/adminLoginGld1"
+
+        app:srcCompat="@drawable/file_add"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <EditText
+        android:id="@+id/fileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:hint="File Name"
+        android:inputType="textPersonName"
+
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@id/fileUpload"
+        app:layout_constraintEnd_toEndOf="@id/adminLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/adminLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/fileAdd"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/selectFile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/fileUpload"
+        app:layout_constraintEnd_toEndOf="@id/adminLoginGld2"
+        app:layout_constraintStart_toStartOf="@id/adminLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/fileName"
+        android:backgroundTint="@color/blue_button"
+        android:text="Select File"/>
+
+    <Button
+        android:id="@+id/fileUpload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@color/blue_button"
+        android:text="File Upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/adminLoginGld1"
+        app:layout_constraintTop_toBottomOf="@id/selectFile"
+        app:layout_constraintEnd_toEndOf="@id/adminLoginGld2"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/adminLoginGld1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/adminLoginGld2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

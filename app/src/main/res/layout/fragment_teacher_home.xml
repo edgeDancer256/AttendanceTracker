@@ -12,32 +12,149 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/homeClasses"
+        <!-- Class 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_class1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
-            android:src="@drawable/asset_bg_green"
-            app:layout_constraintBottom_toTopOf="@id/homeTeachers"
-            app:layout_constraintDimensionRatio="1.5:1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/cardview_class2"
+            app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
+            app:layout_constraintVertical_chainStyle="packed">
 
-        <ImageView
-            android:id="@+id/homeTeachers"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_green"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Python
+                                    Programming"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Class 2 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_class2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/cardview_class3"
 
-            android:src="@drawable/asset_bg_paleblue"
-
-            app:layout_constraintDimensionRatio="1.5:1"
+            app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
-
             app:layout_constraintStart_toStartOf="@id/homeGld1"
-            app:layout_constraintTop_toBottomOf="@id/homeClasses" />
+            app:layout_constraintTop_toBottomOf="@id/cardview_class1">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_paleblue"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"
+                    android:text="Java
+                                    Programming"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Class 3 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_class3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="2:1"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/homeGld2"
+            app:layout_constraintStart_toStartOf="@id/homeGld1"
+            app:layout_constraintTop_toBottomOf="@id/cardview_class2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_yellow"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"
+                    android:text="Advanced
+                                        Algorithms"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- File Upload -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_file_upload"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="30dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="2:1"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/homeGld2"
+            app:layout_constraintStart_toStartOf="@id/homeGld1"
+            app:layout_constraintTop_toBottomOf="@id/cardview_class2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/asset_bg_yellow"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"
+                    android:text="Advanced
+                                        Algorithms"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/homeGld1"
