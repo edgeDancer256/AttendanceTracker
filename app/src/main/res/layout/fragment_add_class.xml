@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MasterFragments.AddClass">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/course_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Course Name : "
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_course_name"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
+
+            <TextView
+                android:id="@+id/add_class_course_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_subject"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/course_name" />
+
+            <TextView
+                android:id="@+id/add_class_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Class ID :"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_id_text"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_course_name" />
+
+            <EditText
+                android:id="@+id/add_class_id_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter unique Class ID(Eg:MSC-CS-AP)"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_subject"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_id" />
+
+            <TextView
+                android:id="@+id/add_class_subject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Subject :"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_sub_name"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_id_text" />
+
+            <EditText
+                android:id="@+id/add_class_sub_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Please enter subject here ..."
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_semester"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_subject" />
+
+            <TextView
+                android:id="@+id/add_class_semester"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Semester :"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_semester_spinner"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_sub_name" />
+
+            <Spinner
+                android:id="@+id/add_class_semester_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:scrollbarSize="50sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_teacher"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_semester" />
+
+            <TextView
+                android:id="@+id/add_class_teacher"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Teacher :"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toTopOf="@id/add_class_teacher_id"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_semester_spinner" />
+
+            <EditText
+                android:id="@+id/add_class_teacher_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Teacher ID"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/add_class_insert"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_teacher" />
+
+            <Button
+                android:id="@+id/add_class_insert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Insert"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/add_class_gld2"
+                app:layout_constraintStart_toStartOf="@id/add_class_gld1"
+                app:layout_constraintTop_toBottomOf="@id/add_class_teacher_id" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/add_class_gld1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/add_class_gld2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </ScrollView>
+
+</FrameLayout>

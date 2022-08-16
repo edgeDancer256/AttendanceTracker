@@ -12,9 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.MasterFragments.ClassList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,8 +35,12 @@ import java.util.ArrayList;
 public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.ClassInfoViewHolder> {
 
     //Credentials for server access
-    //private static final String url = "http://192.168.0.105/att_tracker/delete_class.php";
-    private static final String url = "http://192.168.0.140/att_tracker/delete_class.php";
+    //edgeDancer
+    private static final String url = "http://192.168.0.105/att_tracker/delete_class.php";
+    //l1ght
+    //private static final String url = "http://192.168.1.19/att_tracker/delete_class.php";
+    //College
+    //private static final String url = "http://192.168.0.140/att_tracker/delete_clas.php";
 
     private ArrayList<ClassInfoCard> classInfoCardArrayList;
 
@@ -74,7 +84,8 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 new DeleteEntry().execute(url, currItem.getClass_id());
-                                Toast.makeText(view.getContext(), "Clicked " + currItem.getClass_id(), Toast.LENGTH_SHORT).show();
+                                classInfoCardArrayList.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
                             }
                         })
                         .setNegativeButton(android.R.string.no, null)
@@ -96,7 +107,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
 
             try {
                 //Try connection and store result
-                String query = "?class_id="+cID;
+                String query = "?class_id=" + cID;
                 URL url = new URL(params[0] + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
@@ -105,7 +116,6 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
 
                 while((row = br.readLine()) != null) {
                     sb.append(row).append("\n");
-                    Log.d("tag", sb.toString());
                 }
                 br.close();
                 httpURLConnection.disconnect();
@@ -116,6 +126,11 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
                 Log.d("err", e.toString());
                 return e.getMessage();
             }
+        }
+
+        @Override
+        protected void onPostExecute(String res) {
+            Log.d("res", res);
         }
     }
 }
