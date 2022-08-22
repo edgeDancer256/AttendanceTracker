@@ -37,6 +37,8 @@ public class AddClass extends Fragment {
     private static final String url = "http://192.168.0.105/att_tracker/add_class.php";
     //l1ght
     //private static final String url = "http://192.168.1.19/att_tracker/add_class.php";
+    //l1ght hotspot
+    //private static final String url = "http://192.168.57.104/att_tracker/add_class.php";
     //College
     //private static final String url = "http://192.168.0.140/att_tracker/add_class.php";
 

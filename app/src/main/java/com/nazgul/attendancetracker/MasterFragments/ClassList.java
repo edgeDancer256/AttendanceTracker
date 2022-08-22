@@ -52,6 +52,8 @@ public class ClassList extends Fragment {
     private static final String url = "http://192.168.0.105/att_tracker/class_list.php";
     //l1ght
     //private static final String url = "http://192.168.1.19/att_tracker/class_list.php";
+    //l1ght hotspot
+    //private static final String url = "http://192.168.57.104/att_tracker/class_list.php";
     //College
     //private static final String url = "http://192.168.0.140/att_tracker/class_list.php";
 
@@ -133,19 +135,17 @@ public class ClassList extends Fragment {
                 br.close();
                 httpURLConnection.disconnect();
                 return sb.toString();
-
-
             } catch(Exception e) {
                 Log.d("err", e.toString());
                 return e.getMessage();
             }
-
         }
 
         @SuppressLint("NotifyDataSetChanged")
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
+            classInfoCards.clear();
 
             try {
                 JSONArray jArray = new JSONArray(res);
@@ -163,6 +163,8 @@ public class ClassList extends Fragment {
                             + "Course Name : " + course_name + "\n"
                             + "Semester : " + semester + "\n"
                             + "Teacher ID : " + teacher_id + "\n";
+
+                    Log.d("info", result);
 
                     classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, result, jObj.getString("course_id")));
                 }
@@ -227,5 +229,4 @@ public class ClassList extends Fragment {
             classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, res, c_id));
         }
     }
-
 }

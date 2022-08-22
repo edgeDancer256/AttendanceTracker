@@ -43,6 +43,20 @@ public class Home extends Fragment {
             }
         });
 
+        CardView cd2 = view .findViewById(R.id.cardview_home2);
+        cd2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Send to MasterTeachers
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new MasterTeachers())
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
         CardView cd1 = view.findViewById(R.id.cardview_home4);
         cd1.setOnClickListener(new View.OnClickListener() {
             @Override
