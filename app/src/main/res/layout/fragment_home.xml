@@ -94,7 +94,7 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintDimensionRatio="2:1"
 
-            app:layout_constraintBottom_toTopOf="@id/cardview_home4"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
             app:layout_constraintTop_toBottomOf="@id/cardview_home2"
@@ -119,38 +119,6 @@
 
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_home4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="30dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintDimensionRatio="2:1"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/homeGld2"
-            app:layout_constraintStart_toStartOf="@id/homeGld1"
-            app:layout_constraintTop_toBottomOf="@id/cardview_home3"
-            android:focusable="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/asset_bg_yellow"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="PHP TEST"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/homeGld1"

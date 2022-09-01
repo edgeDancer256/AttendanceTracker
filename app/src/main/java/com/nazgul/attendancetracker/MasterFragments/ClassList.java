@@ -49,13 +49,13 @@ public class ClassList extends Fragment {
 
     //Credentials for server access
     //edgeDancer
-    private static final String url = "http://192.168.0.105/att_tracker/class_list.php";
+    private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    //private static final String url = "http://192.168.1.19/att_tracker/class_list.php";
+    //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String url = "http://192.168.57.104/att_tracker/class_list.php";
+    //private static final String db_url = "http://192.168.57.104/att_tracker";
     //College
-    //private static final String url = "http://192.168.0.140/att_tracker/class_list.php";
+    //private static final String db_url = "http://192.168.0.140/att_tracker";
 
     RecyclerView recView;
     RecyclerView.Adapter recAdapter;
@@ -89,7 +89,7 @@ public class ClassList extends Fragment {
         add_class = v.findViewById(R.id.add_class);
 
         //Call to Async method to query DB
-        new ListDisp().execute(url, cName);
+        new ListDisp().execute(db_url + "/class_list.php", cName);
         return v;
     }
 
@@ -204,7 +204,7 @@ public class ClassList extends Fragment {
                     + "Teacher ID : " + teacher_id + "\n";
 
             try {
-                URL url = new URL(params[0] + query);
+                URL url = new URL(db_url + params[0] + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();

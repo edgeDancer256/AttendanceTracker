@@ -63,24 +63,13 @@ public class TeacherLogin extends AppCompatActivity {
         //Check if user is already logged in. If yes, don't show login screen again
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-
-            fStore.collection("Users")
-                    .whereEqualTo("isTeacher", "0")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if(task.isSuccessful()) {
-                                for(QueryDocumentSnapshot doc : task.getResult()) {
-                                    if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                        startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
-                                        finish();
-                                    }
-                                    Log.d("TAG", doc.getId() + doc.getData().toString());
-                                }
-                            }
-                        }
-                    });
+            if(currentUser.getUid().startsWith("TCH")) {
+                startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                finish();
+            }
+            else {
+                Toast.makeText(TeacherLogin.this, "No access...Leave..", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -97,25 +86,13 @@ public class TeacherLogin extends AppCompatActivity {
                     //Check Email Verification
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                         //If email verified, check access level
-                        fStore.collection("Users")
-                                .whereEqualTo("isTeacher", "0")
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()) {
-                                            //If access OK, Send to Menu
-                                            for(QueryDocumentSnapshot doc : task.getResult()) {
-                                                if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(TeacherLogin.this, "No Access", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
+                        if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().startsWith("TCH")) {
+                            startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                            finish();
+                        }
+                        else {
+                            Toast.makeText(TeacherLogin.this, "No access.. Leave..", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();

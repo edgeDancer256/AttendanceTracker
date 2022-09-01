@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".MasterFragments.MasterClasses">
+    tools:context=".MasterFragments.MasterStudents">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +13,9 @@
         android:layout_height="wrap_content">
 
 
-        <!--Courses Cards-->
-
-
         <!--MSC-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/course_card1"
+            android:id="@+id/student_course1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -26,10 +23,10 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="30dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@id/course_card2"
+            app:layout_constraintBottom_toTopOf="@id/student_course2"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/coursegld2"
-            app:layout_constraintStart_toStartOf="@+id/coursegld1"
+            app:layout_constraintEnd_toEndOf="@id/student_gld2"
+            app:layout_constraintStart_toStartOf="@+id/student_gld1"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -43,8 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/black"
                     android:text="Masters Of
                                     Science"
@@ -57,7 +53,7 @@
 
         <!--BSC-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/course_card2"
+            android:id="@+id/student_course2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -65,11 +61,11 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="30dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@id/course_card3"
+            app:layout_constraintBottom_toTopOf="@id/student_course3"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/coursegld2"
-            app:layout_constraintStart_toStartOf="@+id/coursegld1"
-            app:layout_constraintTop_toBottomOf="@id/course_card1">
+            app:layout_constraintEnd_toEndOf="@id/student_gld2"
+            app:layout_constraintStart_toStartOf="@+id/student_gld1"
+            app:layout_constraintTop_toBottomOf="@id/student_course1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,8 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Science"
@@ -96,7 +91,7 @@
 
         <!--BCOM-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/course_card3"
+            android:id="@+id/student_course3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -104,11 +99,11 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="30dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@id/course_card4"
+            app:layout_constraintBottom_toTopOf="@id/student_course4"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/coursegld2"
-            app:layout_constraintStart_toStartOf="@+id/coursegld1"
-            app:layout_constraintTop_toBottomOf="@id/course_card2">
+            app:layout_constraintEnd_toEndOf="@id/student_gld2"
+            app:layout_constraintStart_toStartOf="@+id/student_gld1"
+            app:layout_constraintTop_toBottomOf="@id/student_course2">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,7 +130,7 @@
 
         <!--BCA-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/course_card4"
+            android:id="@+id/student_course4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -143,11 +138,11 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="30dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toTopOf="@id/course_card5"
+            app:layout_constraintBottom_toTopOf="@id/student_course5"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/coursegld2"
-            app:layout_constraintStart_toStartOf="@+id/coursegld1"
-            app:layout_constraintTop_toBottomOf="@id/course_card3">
+            app:layout_constraintEnd_toEndOf="@id/student_gld2"
+            app:layout_constraintStart_toStartOf="@+id/student_gld1"
+            app:layout_constraintTop_toBottomOf="@id/student_course3">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,7 +169,7 @@
 
         <!--BA-->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/course_card5"
+            android:id="@+id/student_course5"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -184,9 +179,9 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/coursegld2"
-            app:layout_constraintStart_toStartOf="@+id/coursegld1"
-            app:layout_constraintTop_toBottomOf="@id/course_card4">
+            app:layout_constraintEnd_toEndOf="@id/student_gld2"
+            app:layout_constraintStart_toStartOf="@+id/student_gld1"
+            app:layout_constraintTop_toBottomOf="@id/student_course4">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -199,8 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Arts"
@@ -211,21 +205,20 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/coursegld1"
+            android:id="@+id/student_gld1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.15"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/coursegld2"
+            android:id="@+id/student_gld2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85" />
-
-
+            app:layout_constraintGuide_percent="0.85"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

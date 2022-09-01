@@ -1,10 +1,8 @@
 package com.nazgul.attendancetracker.MasterFragments;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,10 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.StudentInfoAdapter;
+import com.nazgul.attendancetracker.StudentInfoCard;
 import com.nazgul.attendancetracker.TeacherInfoAdapter;
 import com.nazgul.attendancetracker.TeacherInfoCard;
 
@@ -32,13 +31,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-public class MasterTeachers extends Fragment {
+
+public class StudentList extends Fragment {
 
     //Credentials for server access
     //edgeDancer
@@ -51,68 +47,70 @@ public class MasterTeachers extends Fragment {
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
 
-    RecyclerView recView;
-    RecyclerView.Adapter recAdapter;
-    RecyclerView.LayoutManager recLayout;
-    Button add_teacher;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter adapter;
 
-    String newTeacher;
-    String teacher_ID;
-    String teacher_Name;
-    String teacher_Email;
-    String teacher_Phone;
-    String teacher_Dept;
-    Context context;
+    String course;
+    Button add_student;
+    String res;
+    String std_id;
 
-    ArrayList<TeacherInfoCard> teacherInfoCardArrayList = new ArrayList<>();
+    String student_id;
+    String student_name;
+    String student_email;
+    String student_phone;
+    String student_course;
+
+    ArrayList<StudentInfoCard> studentInfoCardArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Assert existence of argument bundle
+        assert this.getArguments() != null;
+        course = this.getArguments().getString("course");
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_master_teachers, container, false);
-        context = v.getContext();
+        View v = inflater.inflate(R.layout.fragment_student_list, container, false);
+        Context context = v.getContext();
+        recyclerView = v.findViewById(R.id.student_recycler);
+        layoutManager = new LinearLayoutManager(context);
+        add_student = v.findViewById(R.id.add_student);
 
-        recView = v.findViewById(R.id.add_teacher_recycler);
-        recLayout = new LinearLayoutManager(getContext());
-        add_teacher = v.findViewById(R.id.add_teacher);
-
-        new TeacherList().execute(db_url + "/firebase/get_teachers.php");
+        new StudentListDatabase().execute(db_url + "/student_list.php", course);
 
         return v;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        add_teacher.setOnClickListener(new View.OnClickListener() {
+        add_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("course", course);
+                AddStudent addStudent = new AddStudent();
+                addStudent.setArguments(bundle);
                 requireActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new AddTeacher())
+                        .replace(R.id.fragment_container, addStudent)
                         .addToBackStack("tag")
                         .commit();
             }
         });
     }
 
-
-
-    public class TeacherList extends AsyncTask<String, Void, String> {
-        ProgressDialog pd = new ProgressDialog(getContext());
-
-        @Override
-        protected void onPreExecute() {
-            pd.setTitle("Loading Teachers...");
-            pd.show();
-        }
-
+    public class StudentListDatabase extends AsyncTask<String,Void, String> {
         @Override
         protected String doInBackground(String... params) {
+            String courseName = params[1];
+
             try {
-                URL url = new URL(params[0]);
+                //Try connection and store result
+                String query = "?course=" + courseName;
+                URL url = new URL(params[0] + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();
@@ -126,60 +124,58 @@ public class MasterTeachers extends Fragment {
                 httpURLConnection.disconnect();
                 return sb.toString();
             } catch(Exception e) {
-                Log.d("err_conn", e.toString());
+                Log.d("err", e.toString());
                 return e.getMessage();
             }
         }
 
         @SuppressLint("NotifyDataSetChanged")
         @Override
-        protected void onPostExecute(String res) {
-            pd.dismiss();
-            teacherInfoCardArrayList.clear();
+        protected void onPostExecute(String s) {
+            studentInfoCardArrayList.clear();
 
             try {
-                JSONArray jArray = new JSONArray(res);
+                JSONArray jsonArray = new JSONArray(s);
                 JSONObject jObj = null;
-                for(int i = 0; i < jArray.length(); i++) {
-                    jObj = jArray.getJSONObject(i);
-                    String teacher_name = jObj.getString("displayName");
-                    String teacher_id = jObj.getString("uid");
-                    String teacher_email = jObj.getString("email");
-                    String teacher_ph_no = jObj.getString("phoneNumber");
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    jObj = jsonArray.getJSONObject(i);
+                    String std_name = jObj.getString("student_name");
+                    String std_id = jObj.getString("student_id");
+                    String std_email = jObj.getString("student_email");
+                    String std_ph_no = jObj.getString("student_phone");
 
-                    String result = "Name : " + teacher_name + "\n"
-                            + "ID : " + teacher_id + "\n"
-                            + "Email : " + teacher_email + "\n"
-                            + "Ph. No. : " + teacher_ph_no + "\n";
+                    String result = "Name : " + std_name + "\n"
+                            + "ID : " + std_id + "\n"
+                            + "Email : " + std_email + "\n"
+                            + "Ph. No. : " + std_ph_no + "\n";
 
-                    teacherInfoCardArrayList.add(new TeacherInfoCard(R.drawable.ic_delete, result, teacher_id));
+                    studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete, result, std_id));
                 }
             } catch(Exception e) {
                 Log.d("err_encode", e.getMessage());
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Something went wrong :(", Toast.LENGTH_SHORT).show();
             }
 
-            recAdapter = new TeacherInfoAdapter(teacherInfoCardArrayList);
-            recView.setLayoutManager(recLayout);
-            recView.setAdapter(recAdapter);
-            recAdapter.notifyDataSetChanged();
+            adapter = new StudentInfoAdapter(studentInfoCardArrayList);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
 
-    public class AddTeacherFirebase extends AsyncTask<String, Void, String> {
+    public class AddStudentFirebase extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-
-            teacher_ID = params[0];
-            teacher_Name = params[1];
-            teacher_Email = params[2];
-            teacher_Phone = params[3];
-            teacher_Dept = params[4];
-            String query = "?uid=" + teacher_ID
-                    + "&email=" + teacher_Email
-                    + "&phoneNumber=" + teacher_Phone
-                    + "&password=" + teacher_ID
-                    + "&displayName=" + teacher_Name;
+            student_id = params[0];
+            student_name = params[1];
+            student_email = params[2];
+            student_phone = params[3];
+            student_course = params[4];
+            String query = "?uid=" + student_id
+                    + "&email=" + student_email
+                    + "&phoneNumber=" + student_phone
+                    + "&password=" + student_id
+                    + "&displayName=" + student_name;
 
             try {
                 URL url = new URL(db_url + "/firebase/create_user.php" + query);
@@ -193,49 +189,46 @@ public class MasterTeachers extends Fragment {
                     Log.d("tag", sb.toString());
                 }
 
-                newTeacher = "Name : " + teacher_Name + "\n"
-                        + "ID : " + teacher_ID + "\n"
-                        + "Email : " + teacher_Email + "\n"
-                        + "Ph. No. : " + teacher_Phone + "\n";
+                res = "Name : " + student_name + "\n"
+                        + "ID : " + student_id + "\n"
+                        + "Email : " + student_email + "\n"
+                        + "Ph. No. : " + student_phone + "\n";
                 br.close();
                 httpURLConnection.disconnect();
-
-
                 return sb.toString();
             } catch(Exception e) {
                 Log.d("err_conn", e.toString());
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Something went wrong :(", Toast.LENGTH_SHORT).show();
                 return e.getMessage();
             }
         }
 
         @Override
         protected void onPostExecute(String s) {
-            new AddTeacherDatabase().execute(teacher_ID, teacher_Name, teacher_Email, teacher_Phone, teacher_Dept);
+            new AddStudentDatabase().execute(student_id, student_name, student_email, student_phone, student_course);
 
-            teacherInfoCardArrayList.add(new TeacherInfoCard(R.drawable.ic_delete, newTeacher, teacher_ID));
+            studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete, res, student_id));
             Log.d("res", "User added successfully");
         }
     }
 
-    public class AddTeacherDatabase extends AsyncTask<String, Void, String> {
+    public class AddStudentDatabase extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
+            String student_id = params[0];
+            String student_name = params[1];
+            String student_email = params[2];
+            String student_phone = params[3];
+            String student_course = params[4];
 
-            String teacher_id = params[0];
-            String teacher_name = params[1];
-            String teacher_email = params[2];
-            String teacher_phone = params[3];
-            String teacher_dept = params[4];
-
-            String query = "?id=" + teacher_id
-                    + "&name=" + teacher_name
-                    + "&email=" + teacher_email
-                    + "&phone=" + teacher_phone
-                    + "&dept=" + teacher_dept;
+            String query = "?student_id=" + student_id
+                    + "&student_name=" + student_name
+                    + "&student_email=" + student_email
+                    + "&student_phone=" + student_phone
+                    + "&student_course=" + student_course;
 
             try {
-                URL url = new URL(db_url + "/add_teachers.php" + query);
+                URL url = new URL(db_url + "/add_students.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();

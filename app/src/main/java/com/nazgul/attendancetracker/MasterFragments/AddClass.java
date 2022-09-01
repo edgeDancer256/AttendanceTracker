@@ -32,16 +32,6 @@ import kotlin.collections.ArrayDeque;
 
 public class AddClass extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String url = "http://192.168.0.105/att_tracker/add_class.php";
-    //l1ght
-    //private static final String url = "http://192.168.1.19/att_tracker/add_class.php";
-    //l1ght hotspot
-    //private static final String url = "http://192.168.57.104/att_tracker/add_class.php";
-    //College
-    //private static final String url = "http://192.168.0.140/att_tracker/add_class.php";
-
     String course_id;
     String cName;
     String semester;
@@ -80,8 +70,8 @@ public class AddClass extends Fragment {
 
         lv1 = view.findViewById(R.id.add_class_semester_spinner);
 
-        String[] list = new String[] {
-                "1", "2", "3", "4", "5", "6"
+        String[] list = new String[]{
+                "1", "2", "3", "4", "5", "6", "7", "8"
         };
 
         List<String> l1 = new ArrayDeque<String>(Arrays.asList(list));
@@ -94,7 +84,6 @@ public class AddClass extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 semester = (String) adapterView.getItemAtPosition(i);
-                Toast.makeText(getContext(),  ""+semester, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -115,7 +104,7 @@ public class AddClass extends Fragment {
 
                 ClassList cl = new ClassList();
 
-                cl.new InsertClass().execute(url, course_id, cName, semester, subject, teacher_id);
+                cl.new InsertClass().execute("/add_class.php", course_id, cName, semester, subject, teacher_id);
 
                 requireActivity().getSupportFragmentManager().popBackStack();
             }

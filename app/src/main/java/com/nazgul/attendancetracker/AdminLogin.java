@@ -39,7 +39,6 @@ public class AdminLogin extends AppCompatActivity {
     private Button login;
     //FirebaseAuth instance
     private FirebaseAuth mAuth;
-    //Firestore instance
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     @Override

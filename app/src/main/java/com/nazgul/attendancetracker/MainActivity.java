@@ -10,12 +10,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     //Buttons for Logging in for different user roles
     Button admin_login;
     Button teacher_login;
     Button student_login;
+    private FirebaseAuth mAuth;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null) {
+            if(mAuth.getCurrentUser().getUid().startsWith("A6Pm")) { //REPLACE WITH "ADMIN" LATER!!!!!!!!
+                Intent in = new Intent(MainActivity.this, AdminMenu.class);
+                startActivity(in);
+                finish();
+            } else if(mAuth.getCurrentUser().getUid().startsWith("TCH")) {
+                Intent in = new Intent(MainActivity.this, TeacherMenu.class);
+                startActivity(in);
+                finish();
+            } else if(mAuth.getCurrentUser().getUid().startsWith("STD")) {
+                Intent in = new Intent(MainActivity.this, StudentMenu.class);
+                startActivity(in);
+                finish();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

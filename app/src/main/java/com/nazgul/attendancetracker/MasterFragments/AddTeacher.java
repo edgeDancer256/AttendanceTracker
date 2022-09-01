@@ -27,7 +27,7 @@ public class AddTeacher extends Fragment {
     Button add_teacher_submit;
 
     String teacherID;
-    String teacherName;;
+    String teacherName;
     String teacherEmail;
     String teacherPhone;
     String teacherDept;
@@ -62,8 +62,7 @@ public class AddTeacher extends Fragment {
 
                 MasterTeachers mt = new MasterTeachers();
 
-
-                mt.new AddTeacherFirebase().execute(teacherID, teacherName, teacherEmail, teacherPhone);
+                mt.new AddTeacherFirebase().execute(teacherID, teacherName, teacherEmail, teacherPhone, teacherDept);
 
                 requireActivity().getSupportFragmentManager().popBackStack();
             }

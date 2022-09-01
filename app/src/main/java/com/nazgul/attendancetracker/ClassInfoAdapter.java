@@ -1,6 +1,8 @@
 package com.nazgul.attendancetracker;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,14 +39,15 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
 
     //Credentials for server access
     //edgeDancer
-    private static final String url = "http://192.168.0.105/att_tracker/delete_class.php";
+    private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    //private static final String url = "http://192.168.1.19/att_tracker/delete_class.php";
+    //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String url = "http://192.168.57.104/att_tracker/delete_class.php";
+    //private static final String db_url = "http://192.168.57.104/att_tracker";
     //College
-    //private static final String url = "http://localhost/att_tracker/delete_clas.php";
+    //private static final String db_url = "http://192.168.0.140/att_tracker";
 
+    Context context;
     private ArrayList<ClassInfoCard> classInfoCardArrayList;
 
     public static class ClassInfoViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +69,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
     @NonNull
     @Override
     public ClassInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_info, parent, false);
         ClassInfoViewHolder civh = new ClassInfoViewHolder(v);
         return civh;
@@ -85,7 +90,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                new DeleteEntry().execute(url, currItem.getClass_id());
+                                new DeleteEntry().execute(db_url, currItem.getClass_id());
                                 classInfoCardArrayList.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
                             }
@@ -102,7 +107,17 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
         return classInfoCardArrayList.size();
     }
 
+
+    //Method to delete class
     private class DeleteEntry extends AsyncTask<String, Void, String> {
+        ProgressDialog pd = new ProgressDialog(context);
+
+        @Override
+        protected void onPreExecute() {
+            pd.setTitle("Deleting Class...");
+            pd.show();
+        }
+
         @Override
         protected String doInBackground(String... params) {
             String cID = params[1];
@@ -110,7 +125,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
             try {
                 //Try connection and store result
                 String query = "?class_id=" + cID;
-                URL url = new URL(params[0] + query);
+                URL url = new URL(params[0] + "/delete_class.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();
@@ -121,9 +136,8 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
                 }
                 br.close();
                 httpURLConnection.disconnect();
+
                 return sb.toString();
-
-
             } catch(Exception e) {
                 Log.d("err", e.toString());
                 return e.getMessage();
@@ -132,6 +146,7 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
 
         @Override
         protected void onPostExecute(String res) {
+            pd.dismiss();
             Log.d("res", res);
         }
     }

@@ -43,7 +43,8 @@ public class Home extends Fragment {
             }
         });
 
-        CardView cd2 = view .findViewById(R.id.cardview_home2);
+        //Handle click for Teachers Card
+        CardView cd2 = view.findViewById(R.id.cardview_home2);
         cd2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +58,9 @@ public class Home extends Fragment {
             }
         });
 
-        CardView cd1 = view.findViewById(R.id.cardview_home4);
+
+        //Handle click for Students Card
+        CardView cd1 = view.findViewById(R.id.cardview_home3);
         cd1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +68,7 @@ public class Home extends Fragment {
                 requireActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new PHPTest())
+                        .replace(R.id.fragment_container, new MasterStudents())
                         .addToBackStack("tag")
                         .commit();
             }
