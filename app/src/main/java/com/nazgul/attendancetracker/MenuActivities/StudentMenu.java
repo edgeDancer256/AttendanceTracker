@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.MenuActivities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -15,6 +15,7 @@ import com.nazgul.attendancetracker.MasterFragments.Home;
 import com.nazgul.attendancetracker.MasterFragments.Notification;
 import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.MasterFragments.Report;
+import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.StudentFragments.StudentHome;
 import com.nazgul.attendancetracker.StudentFragments.StudentNotif;
 import com.nazgul.attendancetracker.StudentFragments.StudentProfile;

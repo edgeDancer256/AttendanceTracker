@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.MasterAdapters;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,16 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.MasterFragments.TeacherInfo;
-
-import org.w3c.dom.Text;
+import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.InfoCards.TeacherInfoCard;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -100,6 +98,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                uid = currItem.getTeacher_id();
 
                 new AlertDialog.Builder(context)
                         .setTitle("Delete Teacher")

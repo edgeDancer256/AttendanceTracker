@@ -54,11 +54,11 @@ public class AddTeacher extends Fragment {
         add_teacher_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                teacherID = teacher_id.getText().toString();
-                teacherName = teacher_name.getText().toString();
-                teacherEmail = teacher_email.getText().toString();
-                teacherPhone = teacher_phone.getText().toString();
-                teacherDept = teacher_dept.getText().toString();
+                teacherID = teacher_id.getText().toString().trim();
+                teacherName = teacher_name.getText().toString().trim();
+                teacherEmail = teacher_email.getText().toString().trim();
+                teacherPhone = teacher_phone.getText().toString().trim();
+                teacherDept = teacher_dept.getText().toString().trim();
 
                 MasterTeachers mt = new MasterTeachers();
 

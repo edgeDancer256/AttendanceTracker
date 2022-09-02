@@ -98,9 +98,9 @@ public class AddClass extends Fragment {
             @Override
             public void onClick(View view) {
 
-                course_id = class_id.getText().toString();
-                subject = class_subject.getText().toString();
-                teacher_id = class_teacher_id.getText().toString();
+                course_id = class_id.getText().toString().trim();
+                subject = class_subject.getText().toString().trim();
+                teacher_id = class_teacher_id.getText().toString().trim();
 
                 ClassList cl = new ClassList();
 

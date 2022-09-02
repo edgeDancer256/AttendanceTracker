@@ -1,22 +1,26 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.MenuActivities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.nazgul.attendancetracker.TeacherFragments.TeacherHome;
-import com.nazgul.attendancetracker.TeacherFragments.TeacherNotif;
-import com.nazgul.attendancetracker.TeacherFragments.TeacherProfile;
-import com.nazgul.attendancetracker.TeacherFragments.TeacherReport;
+import com.nazgul.attendancetracker.MasterFragments.Home;
+import com.nazgul.attendancetracker.MasterFragments.Notification;
+import com.nazgul.attendancetracker.MasterFragments.Profile;
+import com.nazgul.attendancetracker.MasterFragments.Report;
+import com.nazgul.attendancetracker.R;
 
-public class TeacherMenu extends AppCompatActivity {
+public class AdminMenu extends AppCompatActivity {
 
     //Bottom nav bar
     private BottomNavigationView bottomNavigationView;
@@ -27,7 +31,7 @@ public class TeacherMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_menu);
+        setContentView(R.layout.activity_admin_menu);
 
         //Init bottom nav bar
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -36,26 +40,26 @@ public class TeacherMenu extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()) {
+                switch (item.getItemId()) {
                     case R.id.nav_home:
                         //Home fragment
-                        selectFragment = new TeacherHome();
+                        selectFragment = new Home();
                         break;
                     case R.id.nav_report:
                         //Report fragment
-                        selectFragment = new TeacherReport();
+                        selectFragment = new Report();
                         break;
                     case R.id.nav_notif:
                         //Notification fragment
-                        selectFragment = new TeacherNotif();
+                        selectFragment = new Notification();
                         break;
                     case R.id.nav_profile:
                         //Profile fragment
-                        selectFragment = new TeacherProfile();
+                        selectFragment = new Profile();
                         break;
                 }
 
-                if(selectFragment != null) {
+                if (selectFragment != null) {
                     //Inflate selected fragment
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
                 }
@@ -65,18 +69,21 @@ public class TeacherMenu extends AppCompatActivity {
         });
 
         //Load home fragment by default
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeacherHome()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
+
 
         //TO BE CHECKED LATER!!!!!!!!!!!!
         bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if(i3 > 0 && bottomNavigationView.isShown()) {
+                if (i3 > 0 && bottomNavigationView.isShown()) {
                     bottomNavigationView.setVisibility(View.GONE);
-                } else if(i3 < 0) {
+                } else if (i3 < 0) {
                     bottomNavigationView.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
+
+
 }

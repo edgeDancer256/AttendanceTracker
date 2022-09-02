@@ -19,10 +19,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
-import com.nazgul.attendancetracker.StudentInfoAdapter;
-import com.nazgul.attendancetracker.StudentInfoCard;
-import com.nazgul.attendancetracker.TeacherInfoAdapter;
-import com.nazgul.attendancetracker.TeacherInfoCard;
+import com.nazgul.attendancetracker.MasterAdapters.StudentInfoAdapter;
+import com.nazgul.attendancetracker.InfoCards.StudentInfoCard;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -85,6 +83,7 @@ public class StudentList extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        view.refreshDrawableState();
         add_student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +152,9 @@ public class StudentList extends Fragment {
                 }
             } catch(Exception e) {
                 Log.d("err_encode", e.getMessage());
-                Toast.makeText(getContext(), "Something went wrong :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),
+                        "Something went wrong :(",
+                        Toast.LENGTH_SHORT).show();
             }
 
             adapter = new StudentInfoAdapter(studentInfoCardArrayList);

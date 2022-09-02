@@ -2,7 +2,6 @@ package com.nazgul.attendancetracker.MasterFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,24 +9,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.nazgul.attendancetracker.ClassInfoAdapter;
-import com.nazgul.attendancetracker.ClassInfoCard;
+import com.nazgul.attendancetracker.MasterAdapters.ClassInfoAdapter;
+import com.nazgul.attendancetracker.InfoCards.ClassInfoCard;
 import com.nazgul.attendancetracker.R;
 
 import org.json.JSONArray;
@@ -37,13 +31,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class ClassList extends Fragment {
 

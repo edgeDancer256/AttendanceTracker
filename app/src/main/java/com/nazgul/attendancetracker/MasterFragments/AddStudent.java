@@ -58,10 +58,10 @@ public class AddStudent extends Fragment {
         add_student_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                studentID = student_id.getText().toString();
-                studentName = student_name.getText().toString();
-                studentEmail = student_email.getText().toString();
-                studentPhone = student_phone.getText().toString();
+                studentID = student_id.getText().toString().trim();
+                studentName = student_name.getText().toString().trim();
+                studentEmail = student_email.getText().toString().trim();
+                studentPhone = student_phone.getText().toString().trim();
 
                 StudentList sl = new StudentList();
                 sl.new AddStudentFirebase().execute(studentID, studentName, studentEmail, studentPhone, course);

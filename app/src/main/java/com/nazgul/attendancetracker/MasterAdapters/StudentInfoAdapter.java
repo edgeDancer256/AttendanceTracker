@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.MasterAdapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.InfoCards.StudentInfoCard;
 
 import java.util.ArrayList;
 

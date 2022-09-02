@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.InfoCards;
 
 public class ClassInfoCard {
     private int imgRes;

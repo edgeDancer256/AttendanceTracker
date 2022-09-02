@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,12 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
-import com.nazgul.attendancetracker.TeacherInfoAdapter;
-import com.nazgul.attendancetracker.TeacherInfoCard;
+import com.nazgul.attendancetracker.MasterAdapters.TeacherInfoAdapter;
+import com.nazgul.attendancetracker.InfoCards.TeacherInfoCard;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,10 +30,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MasterTeachers extends Fragment {
