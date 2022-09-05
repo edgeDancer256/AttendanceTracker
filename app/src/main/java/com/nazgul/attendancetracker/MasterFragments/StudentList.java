@@ -59,6 +59,7 @@ public class StudentList extends Fragment {
     String student_email;
     String student_phone;
     String student_course;
+    String student_semester;
 
     ArrayList<StudentInfoCard> studentInfoCardArrayList = new ArrayList<>();
 
@@ -142,13 +143,20 @@ public class StudentList extends Fragment {
                     String std_id = jObj.getString("student_id");
                     String std_email = jObj.getString("student_email");
                     String std_ph_no = jObj.getString("student_phone");
+                    String std_sem = jObj.getString("semester");
+                    String std_course = jObj.getString("student_course");
 
                     String result = "Name : " + std_name + "\n"
                             + "ID : " + std_id + "\n"
                             + "Email : " + std_email + "\n"
-                            + "Ph. No. : " + std_ph_no + "\n";
+                            + "Ph. No. : " + std_ph_no + "\n"
+                            + "Semester : " + std_sem + "\n";
 
-                    studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete, result, std_id));
+                    studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete,
+                            result,
+                            std_id,
+                            std_course,
+                            std_sem));
                 }
             } catch(Exception e) {
                 Log.d("err_encode", e.getMessage());
@@ -172,6 +180,7 @@ public class StudentList extends Fragment {
             student_email = params[2];
             student_phone = params[3];
             student_course = params[4];
+            student_semester = params[5];
             String query = "?uid=" + student_id
                     + "&email=" + student_email
                     + "&phoneNumber=" + student_phone
@@ -206,9 +215,13 @@ public class StudentList extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
-            new AddStudentDatabase().execute(student_id, student_name, student_email, student_phone, student_course);
+            new AddStudentDatabase().execute(student_id, student_name, student_email, student_phone, student_course, student_semester);
 
-            studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete, res, student_id));
+            studentInfoCardArrayList.add(new StudentInfoCard(R.drawable.ic_delete,
+                    res,
+                    student_id,
+                    student_course,
+                    student_semester));
             Log.d("res", "User added successfully");
         }
     }
@@ -221,12 +234,14 @@ public class StudentList extends Fragment {
             String student_email = params[2];
             String student_phone = params[3];
             String student_course = params[4];
+            String student_sem = params[5];
 
             String query = "?student_id=" + student_id
                     + "&student_name=" + student_name
                     + "&student_email=" + student_email
                     + "&student_phone=" + student_phone
-                    + "&student_course=" + student_course;
+                    + "&student_course=" + student_course
+                    + "&student_semester=" + student_sem;
 
             try {
                 URL url = new URL(db_url + "/add_students.php" + query);

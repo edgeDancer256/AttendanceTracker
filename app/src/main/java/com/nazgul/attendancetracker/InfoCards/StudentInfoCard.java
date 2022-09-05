@@ -9,12 +9,16 @@ public class StudentInfoCard {
 
     private String student_info;
     private String student_id;
+    private String std_semester;
+    private String std_course;
     private int imgRes;
 
-    public StudentInfoCard(int imgRes, String student_info, String student_id) {
+    public StudentInfoCard(int imgRes, String student_info, String student_id, String std_course, String std_semester) {
         this.imgRes = imgRes;
         this.student_info = student_info;
         this.student_id = student_id;
+        this.std_course = std_course;
+        this.std_semester = std_semester;
     }
 
     public String getStudent_info() {
@@ -27,5 +31,13 @@ public class StudentInfoCard {
 
     public int getImgRes() {
         return imgRes;
+    }
+
+    public String getStd_semester() {
+        return std_semester;
+    }
+
+    public String getStd_course() {
+        return std_course;
     }
 }

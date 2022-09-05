@@ -91,7 +91,11 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
                 bundle.putString("teacher_id", uid);
                 Log.d("uid", uid);
                 ti.setArguments(bundle);
-                aca.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ti).addToBackStack("tag").commit();
+                aca.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, ti)
+                        .addToBackStack("tag")
+                        .commit();
             }
         });
         holder.imgDelete.setImageResource(currItem.getImgRes());
@@ -102,7 +106,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
 
                 new AlertDialog.Builder(context)
                         .setTitle("Delete Teacher")
-                        .setMessage("Are you sure you want to delete the user?")
+                        .setMessage("Are you sure you want to delete the teacher?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

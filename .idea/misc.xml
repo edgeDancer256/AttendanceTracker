@@ -23,18 +23,21 @@
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/activity_teacher_menu.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/bottom_nav.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/class_info.xml" value="0.22" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/file_card.xml" value="0.22" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_add_class.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_add_student.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_add_teacher.xml" value="0.14673913043478262" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_admin_menu.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_class_info.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_class_list.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_file_display.xml" value="0.1743659420289855" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_master_classes.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_master_students.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_master_teachers.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_profile.xml" value="0.2015625" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_report.xml" value="0.17527173913043478" />
+        <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_info.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_layout.xml" value="0.18070652173913043" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_list.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/shara/Downloads/AttendanceTracker/app/src/main/res/layout/fragment_student_login.xml" value="0.18070652173913043" />
