@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker.MasterFragments;
+package com.nazgul.attendancetracker.TeacherFragments;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -13,11 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.StorageReference;
 import com.nazgul.attendancetracker.AdminInfoCards.FileCard;
 import com.nazgul.attendancetracker.MasterAdapters.FileInfoAdapter;
 import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.TeacherAdapters.AssignmentInfoAdapter;
+import com.nazgul.attendancetracker.TeacherInfoCards.AssignmentCard;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class FileDisplay extends Fragment {
+public class ViewAssignments extends Fragment {
 
     //Credentials for server access
     //edgeDancer
@@ -44,33 +44,35 @@ public class FileDisplay extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
+    int id_length;
+    String id;
 
-    ArrayList<FileCard> fileCards = new ArrayList<>();
+    ArrayList<AssignmentCard> assignmentCards = new ArrayList<>();
 
-
-    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_file_display, container, false);
-        recyclerView = v.findViewById(R.id.file_recycler);
+        assert this.getArguments() != null;
+        id = this.getArguments().getString("id");
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_view_assignments, container, false);
+        recyclerView = v.findViewById(R.id.assign_recycler);
         layoutManager = new LinearLayoutManager(getContext());
 
-        //new GetFiles().execute();
+        id_length = id.length();
 
+        new GetAssignments().execute(id);
 
-        new GetFiles().execute(db_url);
-
-        // Inflate the layout for this fragment
         return v;
     }
 
-    private class GetFiles extends AsyncTask<String, Void, String>{
+    public class GetAssignments extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
+            String id = params[0];
             try {
                 //Try connection and store result
-                URL url = new URL(params[0] + "/firebase/storage_test.php");
+                URL url = new URL(db_url + "/firebase/get_assignments.php" + "?id=" + id);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();
@@ -92,24 +94,25 @@ public class FileDisplay extends Fragment {
         @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void onPostExecute(String s) {
-            fileCards.clear();
+            assignmentCards.clear();
 
             try {
                 JSONArray jsonArray = new JSONArray(s);
                 JSONObject jsonObject = null;
-                for(int i = 0; i < jsonArray.length();i++) {
+                int begin_index = 12 + id_length + 1;
+                for(int i = 1; i < jsonArray.length();i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
-                    String fname = name.substring(12).trim();
+                    String fname = name.substring(begin_index).trim();
                     String token = jsonObject.getString("token").trim();
 
-                    fileCards.add(new FileCard(R.drawable.ic_download_foreground, fname, token));
+                    assignmentCards.add(new AssignmentCard(R.drawable.ic_download_foreground, fname, token, id));
                 }
             } catch(Exception e) {
                 Log.d("err", e.getMessage());
             }
 
-            adapter = new FileInfoAdapter(fileCards);
+            adapter = new AssignmentInfoAdapter(assignmentCards);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();

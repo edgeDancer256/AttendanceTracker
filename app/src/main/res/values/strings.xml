@@ -29,5 +29,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_class">Add Class</string>
     <string name="add_teacher">Add Teacher</string>
+    <string name="attendance">Attendance</string>
+    <string name="upload_question_paper">Upload Question Paper</string>
+    <string name="view_assignments">View Assignments</string>
+    <string name="take_attendance">Take Attendance</string>
 
 </resources>

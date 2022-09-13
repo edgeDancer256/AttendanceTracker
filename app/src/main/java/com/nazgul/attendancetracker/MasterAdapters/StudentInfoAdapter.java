@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.MasterFragments.StudentInfo;
 import com.nazgul.attendancetracker.R;
-import com.nazgul.attendancetracker.InfoCards.StudentInfoCard;
+import com.nazgul.attendancetracker.AdminInfoCards.StudentInfoCard;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +39,7 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -132,15 +137,63 @@ public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.
             String uid = params[0];
 
 
-            return null;
+            try {
+                String query = "?id=" + uid;
+                URL url = new URL(db_url + "/admin/delete_student.php" + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
+
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                }
+
+                br.close();
+                httpURLConnection.disconnect();
+
+                return sb.toString();
+            } catch(Exception e) {
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("res", s);
         }
     }
 
 
     public class DeleteStudentFirebase extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... strings) {
-            return null;
+        protected String doInBackground(String... params) {
+            String uid = params[0];
+            String query = "?uid=" + uid;
+
+            try {
+                URL url = new URL(db_url + "/firebase/delete_user.php" + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
+
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                    Log.d("tag", sb.toString());
+                }
+                br.close();
+                httpURLConnection.disconnect();
+                return sb.toString();
+            } catch(Exception e) {
+                Log.d("err_conn", e.toString());
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("res", s);
         }
     }
 }

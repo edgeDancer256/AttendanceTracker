@@ -49,10 +49,6 @@ public class AdminMenu extends AppCompatActivity {
                         //Report fragment
                         selectFragment = new Report();
                         break;
-                    case R.id.nav_notif:
-                        //Notification fragment
-                        selectFragment = new Notification();
-                        break;
                     case R.id.nav_profile:
                         //Profile fragment
                         selectFragment = new Profile();

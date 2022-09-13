@@ -50,10 +50,6 @@ public class StudentMenu extends AppCompatActivity {
                         //Report fragment
                         selectFragment = new StudentReport();
                         break;
-                    case R.id.nav_notif:
-                        //Notification fragment
-                        selectFragment = new StudentNotif();
-                        break;
                     case R.id.nav_profile:
                         //Profile fragment
                         selectFragment = new StudentProfile();

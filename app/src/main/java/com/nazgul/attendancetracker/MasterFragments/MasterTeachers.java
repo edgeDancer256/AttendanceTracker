@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.MasterAdapters.TeacherInfoAdapter;
-import com.nazgul.attendancetracker.InfoCards.TeacherInfoCard;
+import com.nazgul.attendancetracker.AdminInfoCards.TeacherInfoCard;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +40,7 @@ public class MasterTeachers extends Fragment {
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -229,7 +229,7 @@ public class MasterTeachers extends Fragment {
                     + "&dept=" + teacher_dept;
 
             try {
-                URL url = new URL(db_url + "/add_teachers.php" + query);
+                URL url = new URL(db_url + "/admin/add_teachers.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();

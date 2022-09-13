@@ -12,16 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nazgul.attendancetracker.InfoCards.FileCard;
+import com.nazgul.attendancetracker.AdminInfoCards.FileCard;
 import com.nazgul.attendancetracker.R;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by Sharat on 05-09-2022, Sep, 2022.

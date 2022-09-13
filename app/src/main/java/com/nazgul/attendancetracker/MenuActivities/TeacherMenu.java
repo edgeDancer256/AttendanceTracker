@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherHome;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherNotif;
@@ -23,12 +24,18 @@ public class TeacherMenu extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     //Fragment to be displayed
     private Fragment selectFragment;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_menu);
+
+        String uid = mAuth.getCurrentUser().getUid();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("uid", uid);
 
         //Init bottom nav bar
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -46,10 +53,7 @@ public class TeacherMenu extends AppCompatActivity {
                         //Report fragment
                         selectFragment = new TeacherReport();
                         break;
-                    case R.id.nav_notif:
-                        //Notification fragment
-                        selectFragment = new TeacherNotif();
-                        break;
+
                     case R.id.nav_profile:
                         //Profile fragment
                         selectFragment = new TeacherProfile();
@@ -58,7 +62,8 @@ public class TeacherMenu extends AppCompatActivity {
 
                 if(selectFragment != null) {
                     //Inflate selected fragment
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
+                    selectFragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).addToBackStack("tag").commit();
                 }
 
                 return true;
@@ -66,7 +71,9 @@ public class TeacherMenu extends AppCompatActivity {
         });
 
         //Load home fragment by default
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeacherHome()).commit();
+        TeacherHome th = new TeacherHome();
+        th.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, th).commit();
 
         //TO BE CHECKED LATER!!!!!!!!!!!!
         bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {

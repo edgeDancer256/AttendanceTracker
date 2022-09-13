@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.nazgul.attendancetracker.MasterAdapters.ClassInfoAdapter;
-import com.nazgul.attendancetracker.InfoCards.ClassInfoCard;
+import com.nazgul.attendancetracker.AdminInfoCards.ClassInfoCard;
 import com.nazgul.attendancetracker.R;
 
 import org.json.JSONArray;
@@ -41,7 +41,7 @@ public class ClassList extends Fragment {
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -77,7 +77,7 @@ public class ClassList extends Fragment {
         add_class = v.findViewById(R.id.add_class);
 
         //Call to Async method to query DB
-        new ListDisp().execute(db_url + "/class_list.php", cName);
+        new ListDisp().execute(db_url + "/admin/class_list.php", cName);
         return v;
     }
 

@@ -104,7 +104,7 @@ public class AddClass extends Fragment {
 
                 ClassList cl = new ClassList();
 
-                cl.new InsertClass().execute("/add_class.php", course_id, cName, semester, subject, teacher_id);
+                cl.new InsertClass().execute("/admin/add_class.php", course_id, cName, semester, subject, teacher_id);
 
                 requireActivity().getSupportFragmentManager().popBackStack();
             }

@@ -34,7 +34,7 @@ public class TeacherInfo extends Fragment {
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -80,7 +80,7 @@ public class TeacherInfo extends Fragment {
             String query = "?tid=" + tID;
 
             try {
-                URL url = new URL(params[0] + "/teacher_info.php" + query);
+                URL url = new URL(params[0] + "/admin/teacher_info.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();
@@ -134,7 +134,7 @@ public class TeacherInfo extends Fragment {
             String query = "?tid=" + tID;
 
             try {
-                URL url = new URL(params[0] + "/teacher_classes.php" + query);
+                URL url = new URL(params[0] + "/admin/teacher_classes.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();

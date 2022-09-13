@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker.InfoCards;
+package com.nazgul.attendancetracker.AdminInfoCards;
 
 /**
  * Created by Sharat on 18-08-2022, Aug, 2022.

@@ -35,7 +35,7 @@ public class StudentInfo extends Fragment {
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -83,7 +83,7 @@ public class StudentInfo extends Fragment {
 
             String id = params[0];
 
-            String query = "/student_info.php?sid=" + id;
+            String query = "/admin/student_info.php?sid=" + id;
 
             try {
                 URL url = new URL(db_url + query);
@@ -138,7 +138,7 @@ public class StudentInfo extends Fragment {
             String course = params[0];
             String semseter = params[1];
 
-            String query = "/student_classes.php?course=" + course + "&semester=" + semseter;
+            String query = "/admin/student_classes.php?course=" + course + "&semester=" + semseter;
 
             try {
                 URL url = new URL(db_url + query);

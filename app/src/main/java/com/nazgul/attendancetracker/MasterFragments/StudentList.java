@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.MasterAdapters.StudentInfoAdapter;
-import com.nazgul.attendancetracker.InfoCards.StudentInfoCard;
+import com.nazgul.attendancetracker.AdminInfoCards.StudentInfoCard;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +40,7 @@ public class StudentList extends Fragment {
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -77,7 +77,7 @@ public class StudentList extends Fragment {
         layoutManager = new LinearLayoutManager(context);
         add_student = v.findViewById(R.id.add_student);
 
-        new StudentListDatabase().execute(db_url + "/student_list.php", course);
+        new StudentListDatabase().execute(db_url + "/admin/student_list.php", course);
 
         return v;
     }
@@ -244,7 +244,7 @@ public class StudentList extends Fragment {
                     + "&student_semester=" + student_sem;
 
             try {
-                URL url = new URL(db_url + "/add_students.php" + query);
+                URL url = new URL(db_url + "/admin/add_students.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();

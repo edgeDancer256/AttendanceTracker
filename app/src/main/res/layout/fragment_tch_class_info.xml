@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
+    tools:context=".TeacherFragments.TchClassInfo">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/take_attendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="@string/take_attendance"
+            android:textColor="@color/black"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/black"
+            app:cornerRadius="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
+            app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
+            app:layout_constraintBottom_toTopOf="@id/view_assignments"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/view_assignments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="@string/view_assignments"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/black"
+            android:textColor="@color/black"
+            app:cornerRadius="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
+            app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
+            app:layout_constraintBottom_toTopOf="@id/upload_qp"
+            app:layout_constraintTop_toBottomOf="@id/take_attendance" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upload_qp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="@string/upload_question_paper"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/black"
+            android:textColor="@color/black"
+            app:cornerRadius="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
+            app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_assignments" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tch_class_info_gld1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tch_class_info_gld2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

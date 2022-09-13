@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.MasterFragments.TeacherInfo;
 import com.nazgul.attendancetracker.R;
-import com.nazgul.attendancetracker.InfoCards.TeacherInfoCard;
+import com.nazgul.attendancetracker.AdminInfoCards.TeacherInfoCard;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,7 +40,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
     //l1ght
     //private static final String db_url = "http://192.168.1.19/att_tracker";
     //l1ght hotspot
-    //private static final String db_url = "http://192.168.57.104/att_tracker";
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
     //private static final String db_url = "http://192.168.0.140/att_tracker";
 
@@ -140,7 +140,7 @@ public class TeacherInfoAdapter extends RecyclerView.Adapter<TeacherInfoAdapter.
 
             try {
                 String query = "?id=" + uid;
-                URL url = new URL(params[0] + "/delete_teacher.php" + query);
+                URL url = new URL(params[0] + "/admin/delete_teacher.php" + query);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
                 StringBuffer sb = new StringBuffer();
