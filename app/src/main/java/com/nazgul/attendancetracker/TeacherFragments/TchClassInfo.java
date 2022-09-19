@@ -20,10 +20,14 @@ public class TchClassInfo extends Fragment {
     MaterialButton take_attendance;
     MaterialButton view_assignments;
     MaterialButton upload_qp;
+    String class_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        assert this.getArguments() != null;
+        class_id = this.getArguments().getString("id");
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_tch_class_info, container, false);
 
@@ -48,7 +52,7 @@ public class TchClassInfo extends Fragment {
             public void onClick(View view) {
                 ViewAssignments va = new ViewAssignments();
                 Bundle bundle = new Bundle();
-                bundle.putString("id", "meh");
+                bundle.putString("id", class_id);
                 va.setArguments(bundle);
 
                 requireActivity()
@@ -63,7 +67,16 @@ public class TchClassInfo extends Fragment {
         upload_qp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                TeacherQuestionPaperUpload tqpu = new TeacherQuestionPaperUpload();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", class_id);
+                tqpu.setArguments(bundle);
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, tqpu)
+                        .addToBackStack("tag")
+                        .commit();
             }
         });
     }

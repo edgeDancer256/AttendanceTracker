@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="20dp"
-    tools:context=".MasterFragments.Home">
+    tools:context=".TeacherFragments.TeacherHome">
 
 
     <androidx.recyclerview.widget.RecyclerView

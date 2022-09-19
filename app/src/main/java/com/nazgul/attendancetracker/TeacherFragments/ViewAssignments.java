@@ -33,9 +33,9 @@ public class ViewAssignments extends Fragment {
 
     //Credentials for server access
     //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
+    //private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    //private static final String db_url = "http://192.168.1.19/att_tracker";
+    private static final String db_url = "http://192.168.1.11/att_tracker";
     //l1ght hotspot
     //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
@@ -100,7 +100,7 @@ public class ViewAssignments extends Fragment {
                 JSONArray jsonArray = new JSONArray(s);
                 JSONObject jsonObject = null;
                 int begin_index = 12 + id_length + 1;
-                for(int i = 1; i < jsonArray.length();i++) {
+                for(int i = 0; i < jsonArray.length();i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
                     String fname = name.substring(begin_index).trim();

@@ -25,9 +25,6 @@ import java.util.ArrayList;
 public class TeacherHomeInfoAdapter extends RecyclerView.Adapter<TeacherHomeInfoAdapter.TeacherHomeInfoViewHolder>{
 
     Context context;
-    String course;
-    String semester;
-    String info;
     ArrayList<HomeCard> homeCards;
 
     public static class TeacherHomeInfoViewHolder extends RecyclerView.ViewHolder {

@@ -28,9 +28,9 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
 
     //Credentials for server access
     //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
+    //private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    //private static final String db_url = "http://192.168.1.19/att_tracker";
+    private static final String db_url = "http://192.168.1.11/att_tracker";
     //l1ght hotspot
     //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
@@ -69,7 +69,15 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
         ClassInfoCard currItem = classInfoCardArrayList.get(position);
 
         holder.txt1.setText(currItem.getText());
+        holder.txt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         holder.imgButton.setImageResource(currItem.getImgRes());
+
         holder.imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

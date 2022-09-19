@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/black"
             />
 
