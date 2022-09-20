@@ -35,9 +35,9 @@ public class StudentHome extends Fragment {
 
     //Credentials for server access
     //edgeDancer
-    //private static final String db_url = "http://192.168.0.105/att_tracker";
+    private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    private static final String db_url = "http://192.168.1.11/att_tracker";
+    //private static final String db_url = "http://192.168.1.11/att_tracker";
     //l1ght hotspot
     //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nazgul.attendancetracker.AdminInfoCards.ClassInfoCard;
+import com.nazgul.attendancetracker.MasterFragments.ClassInfoQp;
 import com.nazgul.attendancetracker.R;
 
 import java.io.BufferedReader;
@@ -68,11 +71,24 @@ public class ClassInfoAdapter extends RecyclerView.Adapter<ClassInfoAdapter.Clas
     public void onBindViewHolder(@NonNull ClassInfoViewHolder holder, int position) {
         ClassInfoCard currItem = classInfoCardArrayList.get(position);
 
-        holder.txt1.setText(currItem.getText());
+        String disp_txt = "Subject : " + currItem.getSubject() + "\n"
+                + "Semester : " + currItem.getSemester() + "\n";
+
+        holder.txt1.setText(disp_txt);
         holder.txt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Bundle bundle = new Bundle();
+                bundle.putString("tch_id", currItem.getTeacher_id());
+                bundle.putString("class_id", currItem.getClass_id());
+                AppCompatActivity aca = (AppCompatActivity) context;
+                ClassInfoQp classInfoQp = new ClassInfoQp();
+                classInfoQp.setArguments(bundle);
+                aca.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, classInfoQp)
+                        .addToBackStack("tag")
+                        .commit();
             }
         });
 

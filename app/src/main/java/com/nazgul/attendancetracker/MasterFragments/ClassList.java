@@ -37,9 +37,9 @@ public class ClassList extends Fragment {
 
     //Credentials for server access
     //edgeDancer
-    //private static final String db_url = "http://192.168.0.105/att_tracker";
+    private static final String db_url = "http://192.168.0.105/att_tracker";
     //l1ght
-    private static final String db_url = "http://192.168.1.11/att_tracker";
+    //private static final String db_url = "http://192.168.1.11/att_tracker";
     //l1ght hotspot
     //private static final String db_url = "http://192.168.39.104/att_tracker";
     //College
@@ -52,6 +52,12 @@ public class ClassList extends Fragment {
     String cName;
     String res;
     String c_id;
+
+    String class_id;
+    String class_name;
+    String sem;
+    String sub;
+    String tch_id;
 
     //List of the result rows
     ArrayList<ClassInfoCard> classInfoCards = new ArrayList<>();
@@ -146,15 +152,17 @@ public class ClassList extends Fragment {
                     String subject = jObj.getString("subject");
                     String teacher_id = jObj.getString("teacher_id");
 
-                    String result = "Course ID : " + course_id + "\n"
-                            + "Subject : " + subject + "\n"
-                            + "Course Name : " + course_name + "\n"
-                            + "Semester : " + semester + "\n"
-                            + "Teacher ID : " + teacher_id + "\n";
+                    String result = "Subject : " + subject + "\n"
+                            + "Semester : " + semester + "\n";
 
                     Log.d("info", result);
 
-                    classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, result, jObj.getString("course_id")));
+                    classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete,
+                            course_id,
+                            course_name,
+                            semester,
+                            subject,
+                            teacher_id));
                 }
 
             } catch(Exception e) {
@@ -185,11 +193,11 @@ public class ClassList extends Fragment {
                     + "&subject=" + subject
                     + "&teacher_id=" + teacher_id;
 
-            res = "Course ID : " + course_id + "\n"
-                    + "Subject : " + subject + "\n"
-                    + "Course Name : " + course_name + "\n"
-                    + "Semester : " + semester + "\n"
-                    + "Teacher ID : " + teacher_id + "\n";
+            class_id = course_id;
+            class_name = course_name;
+            sem = semester;
+            sub = subject;
+            tch_id = teacher_id;
 
             try {
                 URL url = new URL(db_url + params[0] + query);
@@ -214,7 +222,12 @@ public class ClassList extends Fragment {
         @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void onPostExecute(String s) {
-            classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, res, c_id));
+            classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete,
+                    class_id,
+                    class_name,
+                    sem,
+                    sub,
+                    tch_id));
         }
     }
 }
