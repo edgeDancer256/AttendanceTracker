@@ -1,14 +1,19 @@
 package com.nazgul.attendancetracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
-import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.nazgul.attendancetracker.LoginActivities.AdminLogin;
+import com.nazgul.attendancetracker.LoginActivities.StudentLogin;
+import com.nazgul.attendancetracker.LoginActivities.TeacherLogin;
+import com.nazgul.attendancetracker.MenuActivities.AdminMenu;
+import com.nazgul.attendancetracker.MenuActivities.StudentMenu;
+import com.nazgul.attendancetracker.MenuActivities.TeacherMenu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +21,29 @@ public class MainActivity extends AppCompatActivity {
     Button admin_login;
     Button teacher_login;
     Button student_login;
+    private FirebaseAuth mAuth;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null) {
+            if(mAuth.getCurrentUser().getUid().startsWith("A6Pm")) { //REPLACE WITH "ADMIN" LATER!!!!!!!!
+                Intent in = new Intent(MainActivity.this, AdminMenu.class);
+                startActivity(in);
+                finish();
+            } else if(mAuth.getCurrentUser().getUid().startsWith("TCH")) {
+                Intent in = new Intent(MainActivity.this, TeacherMenu.class);
+                startActivity(in);
+                finish();
+            } else if(mAuth.getCurrentUser().getUid().startsWith("STD")) {
+                Intent in = new Intent(MainActivity.this, StudentMenu.class);
+                startActivity(in);
+                finish();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

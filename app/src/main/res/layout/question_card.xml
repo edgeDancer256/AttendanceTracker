@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+        <TextView
+            android:id="@+id/qp_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:padding="4dp"
+            android:textColor="@color/black"/>
+
+        <ImageButton
+            android:id="@+id/qp_download"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="200dp"
+            android:backgroundTint="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@id/qp_name"
+            android:contentDescription="Download"
+            tools:ignore="HardcodedText" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

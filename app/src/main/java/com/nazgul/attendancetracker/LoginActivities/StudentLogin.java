@@ -1,11 +1,10 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.LoginActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.MenuActivities.StudentMenu;
 
 import java.util.Objects;
 
@@ -63,24 +62,12 @@ public class StudentLogin extends AppCompatActivity {
         //Check if user is already logged in. If yes, don't show login screen again
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-
-            fStore.collection("Users")
-                    .whereEqualTo("isStudent", "0")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if(task.isSuccessful()) {
-                                for(QueryDocumentSnapshot doc : task.getResult()) {
-                                    if(doc.getId().equals(mAuth.getCurrentUser().getUid())) {
-                                        startActivity(new Intent(StudentLogin.this, StudentMenu.class));
-                                        finish();
-                                    }
-                                    Log.d("TAG", doc.getId() + doc.getData().toString());
-                                }
-                            }
-                        }
-                    });
+            if(currentUser.getUid().startsWith("STD")) {
+                startActivity(new Intent(StudentLogin.this, StudentMenu.class));
+                finish();
+            } else {
+                Toast.makeText(StudentLogin.this, "You aren't supposed to be here...Please leave..", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -97,32 +84,21 @@ public class StudentLogin extends AppCompatActivity {
                     //Check Email Verification
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                         //If email verified, check access level
-                        fStore.collection("Users")
-                                .whereEqualTo("isStudent", "0")
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()) {
-                                            //If access OK, Send to Menu
-                                            for(QueryDocumentSnapshot doc : task.getResult()) {
-                                                if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                                    startActivity(new Intent(StudentLogin.this, StudentMenu.class));
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(StudentLogin.this, "No Access", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
+                        if(mAuth.getCurrentUser().getUid().startsWith("STD")) {
+                            startActivity(new Intent(StudentLogin.this, StudentMenu.class));
+                            finish();
+                        } else {
+                            Toast.makeText(StudentLogin.this, "You aren't supposed to be here...Please leave..", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(StudentLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(StudentLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentLogin.this, "Login unsuccessful. PLease check credentials", Toast.LENGTH_SHORT).show();
+                    email.getText().clear();
+                    password.getText().clear();
                 }
             }
         });

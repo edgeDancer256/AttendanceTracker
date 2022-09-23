@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.LoginActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nazgul.attendancetracker.MenuActivities.AdminMenu;
+import com.nazgul.attendancetracker.R;
 
 import java.util.Objects;
 
-public class TeacherLogin extends AppCompatActivity {
+public class AdminLogin extends AppCompatActivity {
 
     //TextViews of Username and Password
     private EditText email;
@@ -31,22 +33,20 @@ public class TeacherLogin extends AppCompatActivity {
     private Button login;
     //FirebaseAuth instance
     private FirebaseAuth mAuth;
-    //Firestore instance
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_login);
+        setContentView(R.layout.activity_admin_login);
 
         //Init FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
         //Init Views
-        email = (EditText) findViewById(R.id.teacherUsrName);
-        password = (EditText) findViewById(R.id.teacherPassword);
-        login = (Button) findViewById(R.id.teacherLogin);
+        email = (EditText) findViewById(R.id.adminUsrName);
+        password = (EditText) findViewById(R.id.adminPassword);
+        login = (Button) findViewById(R.id.adminLogin);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class TeacherLogin extends AppCompatActivity {
         if(currentUser != null) {
 
             fStore.collection("Users")
-                    .whereEqualTo("isTeacher", "0")
+                    .whereEqualTo("isAdmin", "0")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -73,7 +73,7 @@ public class TeacherLogin extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 for(QueryDocumentSnapshot doc : task.getResult()) {
                                     if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                        startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                                        startActivity(new Intent(AdminLogin.this, AdminMenu.class));
                                         finish();
                                     }
                                     Log.d("TAG", doc.getId() + doc.getData().toString());
@@ -98,7 +98,7 @@ public class TeacherLogin extends AppCompatActivity {
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                         //If email verified, check access level
                         fStore.collection("Users")
-                                .whereEqualTo("isTeacher", "0")
+                                .whereEqualTo("isAdmin", "0")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
@@ -107,10 +107,10 @@ public class TeacherLogin extends AppCompatActivity {
                                             //If access OK, Send to Menu
                                             for(QueryDocumentSnapshot doc : task.getResult()) {
                                                 if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                                                    startActivity(new Intent(AdminLogin.this, AdminMenu.class));
                                                     finish();
                                                 } else {
-                                                    Toast.makeText(TeacherLogin.this, "No Access", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(AdminLogin.this, "No Access", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         }
@@ -119,12 +119,10 @@ public class TeacherLogin extends AppCompatActivity {
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
-                        Toast.makeText(TeacherLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdminLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
                     }
-
-
                 } else {
-                    Toast.makeText(TeacherLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
         });

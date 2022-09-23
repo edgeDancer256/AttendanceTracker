@@ -61,7 +61,8 @@
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
-            app:layout_constraintTop_toBottomOf="@id/cardview_home1">
+            app:layout_constraintTop_toBottomOf="@id/cardview_home1"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,10 +94,11 @@
             app:cardUseCompatPadding="true"
             app:layout_constraintDimensionRatio="2:1"
 
-            app:layout_constraintBottom_toTopOf="@id/cardview_home4"
+            app:layout_constraintBottom_toTopOf="@id/file_retrieval"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
-            app:layout_constraintTop_toBottomOf="@id/cardview_home2">
+            app:layout_constraintTop_toBottomOf="@id/cardview_home2"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,9 +118,8 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_home4"
+            android:id="@+id/file_retrieval"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
@@ -130,24 +131,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/homeGld2"
             app:layout_constraintStart_toStartOf="@id/homeGld1"
-            app:layout_constraintTop_toBottomOf="@id/cardview_home3">
+            app:layout_constraintTop_toBottomOf="@id/cardview_home3"
+            android:focusable="true">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/asset_bg_yellow"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="File"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="PHP TEST"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/homeGld1"

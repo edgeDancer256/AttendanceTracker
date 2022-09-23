@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.nazgul.attendancetracker.AdminLogin;
-import com.nazgul.attendancetracker.AdminMenu;
 import com.nazgul.attendancetracker.MainActivity;
 import com.nazgul.attendancetracker.R;
 

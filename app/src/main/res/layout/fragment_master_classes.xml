@@ -43,7 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="@color/black"
                     android:text="Masters Of
                                     Science"
@@ -81,7 +82,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Science"
@@ -111,7 +113,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/asset_bg_palegreen"
+                android:background="@drawable/asset_bg_yellow"
                 android:orientation="vertical">
 
 
@@ -119,7 +121,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Commerce"
@@ -149,7 +152,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/asset_bg_palegreen"
+                android:background="@drawable/asset_bg_green"
                 android:orientation="vertical">
 
 
@@ -157,7 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Computer Applications"
@@ -187,7 +191,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/asset_bg_palegreen"
+                android:background="@drawable/asset_bg_paleorange"
                 android:orientation="vertical">
 
 
@@ -195,7 +199,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:textColor="@color/black"
                     android:text="Bachelor Of
                                     Arts"
@@ -211,14 +216,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/coursegld2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.85" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

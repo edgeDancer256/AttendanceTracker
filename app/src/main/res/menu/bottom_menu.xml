@@ -9,9 +9,9 @@
         android:icon="@drawable/report_icon_foreground"
         android:title=""/>
 
-    <item android:id="@+id/nav_notif"
+   <!-- <item android:id="@+id/nav_notif"
         android:icon="@drawable/notification_icon_foreground"
-        android:title=""/>
+        android:title=""/> -->
 
 
     <item android:id="@+id/nav_profile"

@@ -2,89 +2,65 @@ package com.nazgul.attendancetracker.MasterFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.nazgul.attendancetracker.ClassInfoAdapter;
-import com.nazgul.attendancetracker.ClassInfoCard;
+import com.nazgul.attendancetracker.MasterAdapters.ClassInfoAdapter;
+import com.nazgul.attendancetracker.AdminInfoCards.ClassInfoCard;
 import com.nazgul.attendancetracker.R;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class ClassList extends Fragment {
 
     //Credentials for server access
-    //private static final String url = "jdbc:mysql://192.168.0.105:3306/mainData";
-    private static final String url = "jdbc:mysql://192.168.100.140:3306/mainData";
-    private static final String user = "lucifer";
-    private static final String pass = "lucifer";
-
-    //Views needed
-    TextView txtData;
-    LinearLayout ll;
-    ImageButton imgDelete;
-    Context context;
+    //edgeDancer
+    private static final String db_url = "http://192.168.0.105/att_tracker";
+    //l1ght
+    //private static final String db_url = "http://192.168.1.11/att_tracker";
+    //l1ght hotspot
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
+    //College
+    //private static final String db_url = "http://192.168.0.140/att_tracker";
 
     RecyclerView recView;
     RecyclerView.Adapter recAdapter;
     RecyclerView.LayoutManager recLayout;
+    Button add_class;
+    String cName;
+    String res;
+    String c_id;
+
+    String class_id;
+    String class_name;
+    String sem;
+    String sub;
+    String tch_id;
 
     //List of the result rows
     ArrayList<ClassInfoCard> classInfoCards = new ArrayList<>();
-    List<ClassList.ResSet> resSetList = new ArrayList<ClassList.ResSet>();
-
-    public class ResSet {
-        private String cID;
-        private String className;
-        private String tID;
-
-        private void set_cID(String cID) {
-            this.cID = cID;
-        }
-
-        private void set_ClassName(String className) {
-            this.className = className;
-        }
-
-        private void set_tID(String tID) {
-            this.tID = tID;
-        }
-
-        private String get_cID() {
-            return this.cID;
-        }
-
-        private String get_ClassName() {
-            return this.className;
-        }
-
-        private String get_tID() {
-            return this.tID;
-        }
-    }
 
 
     @Override
@@ -94,7 +70,7 @@ public class ClassList extends Fragment {
 
         //Asserting existence of arguments and retrieving them
         assert this.getArguments() != null;
-        String cName = this.getArguments().getString("cName");
+        cName = this.getArguments().getString("course");
 
         View v = inflater.inflate(R.layout.fragment_class_list, container, false);
         Context context = container.getContext();
@@ -104,73 +80,154 @@ public class ClassList extends Fragment {
 
         recView = v.findViewById(R.id.recycle1);
         recLayout = new LinearLayoutManager(getContext());
+        add_class = v.findViewById(R.id.add_class);
 
         //Call to Async method to query DB
-        new ListDisp().execute(url, pass, user, cName);
+        new ListDisp().execute(db_url + "/admin/class_list.php", cName);
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        add_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AddClass addClass = new AddClass();
+                Bundle bundle = new Bundle();
+                bundle.putString("course_name", cName);
+                addClass.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, addClass)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
     }
 
     public class ListDisp extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            String res = "";
-            String cName = params[3];
+            String cName = params[1];
             try {
-                String result = "";
-
                 //Try connection and store result
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url, user, pass);
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select cID, className, tID from classes where cName = '" + cName + "'");
+                String query = "?course=" + cName;
+                URL url = new URL(params[0] + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
 
-
-                while(rs.next()) {
-                    result += rs.getString(1);
-
-                    ClassList.ResSet resSet = new ClassList.ResSet();
-                    resSet.set_cID(rs.getString(1));
-                    resSet.set_ClassName(rs.getString(2));
-                    resSet.set_tID(rs.getString(3));
-
-
-                    resSetList.add(resSet);
-
-
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                    Log.d("tag", sb.toString());
                 }
-                rs.close();
-                Log.d("tag", result);
-                res = result;
+                br.close();
+                httpURLConnection.disconnect();
+                return sb.toString();
             } catch(Exception e) {
-                e.printStackTrace();
+                Log.d("err", e.toString());
+                return e.getMessage();
             }
-            return res;
         }
 
         @SuppressLint("NotifyDataSetChanged")
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(String res) {
-            LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            classInfoCards.clear();
 
-            layparams.setMargins(20, 20, 20, 20);
+            try {
+                JSONArray jArray = new JSONArray(res);
+                JSONObject jObj = null;
+                for(int i = 0; i < jArray.length(); i++) {
+                    jObj = jArray.getJSONObject(i);
+                    String course_id = jObj.getString("course_id");
+                    String course_name = jObj.getString("course_name");
+                    String semester = jObj.getString("semester");
+                    String subject = jObj.getString("subject");
+                    String teacher_id = jObj.getString("teacher_id");
 
+                    String result = "Subject : " + subject + "\n"
+                            + "Semester : " + semester + "\n";
 
-            for(ClassList.ResSet resSet : resSetList) {
+                    Log.d("info", result);
 
-                String result = "Class ID : " + resSet.get_cID() + "\n" +
-                        "Class Name : " + resSet.get_ClassName() + "\n" +
-                        "Teacher ID : " + resSet.get_tID();
+                    classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete,
+                            course_id,
+                            course_name,
+                            semester,
+                            subject,
+                            teacher_id));
+                }
 
-
-                classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete, result, resSet.get_cID()));
+            } catch(Exception e) {
+                Log.d("err", e.getMessage());
             }
             recAdapter = new ClassInfoAdapter(classInfoCards);
             recView.setLayoutManager(recLayout);
             recView.setAdapter(recAdapter);
             recAdapter.notifyDataSetChanged();
+
         }
     }
 
+    public  class InsertClass extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            c_id = params[1];
+            String course_id = params[1];
+            String course_name = params[2];
+            String semester = params[3];
+            String subject = params[4];
+            String teacher_id = params[5];
+
+            String query = "?course_id=" + course_id
+                    + "&course_name=" + course_name
+                    + "&semester=" + semester
+                    + "&subject=" + subject
+                    + "&teacher_id=" + teacher_id;
+
+            class_id = course_id;
+            class_name = course_name;
+            sem = semester;
+            sub = subject;
+            tch_id = teacher_id;
+
+            try {
+                URL url = new URL(db_url + params[0] + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
+
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                    Log.d("tag", sb.toString());
+                }
+                br.close();
+                httpURLConnection.disconnect();
+                return sb.toString();
+            } catch(Exception e) {
+                Log.d("err", e.toString());
+                return e.getMessage();
+            }
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        protected void onPostExecute(String s) {
+            classInfoCards.add(new ClassInfoCard(R.drawable.ic_delete,
+                    class_id,
+                    class_name,
+                    sem,
+                    sub,
+                    tch_id));
+        }
+    }
 }

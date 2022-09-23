@@ -1,4 +1,4 @@
-package com.nazgul.attendancetracker;
+package com.nazgul.attendancetracker.MenuActivities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nazgul.attendancetracker.MasterFragments.Home;
 import com.nazgul.attendancetracker.MasterFragments.Notification;
 import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.MasterFragments.Report;
+import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.StudentFragments.StudentHome;
 import com.nazgul.attendancetracker.StudentFragments.StudentNotif;
 import com.nazgul.attendancetracker.StudentFragments.StudentProfile;
@@ -26,12 +28,18 @@ public class StudentMenu extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     //Fragment to be displayed
     private Fragment selectFragment;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_menu);
+
+        String uid = mAuth.getCurrentUser().getUid();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("uid", uid);
 
         //Init bottom nav bar
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -49,10 +57,6 @@ public class StudentMenu extends AppCompatActivity {
                         //Report fragment
                         selectFragment = new StudentReport();
                         break;
-                    case R.id.nav_notif:
-                        //Notification fragment
-                        selectFragment = new StudentNotif();
-                        break;
                     case R.id.nav_profile:
                         //Profile fragment
                         selectFragment = new StudentProfile();
@@ -61,6 +65,7 @@ public class StudentMenu extends AppCompatActivity {
 
                 if(selectFragment != null) {
                     //Inflate selected fragment
+                    selectFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
                 }
 
@@ -69,7 +74,9 @@ public class StudentMenu extends AppCompatActivity {
         });
 
         //Load home fragment by default
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StudentHome()).commit();
+        StudentHome sh = new StudentHome();
+        sh.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, sh).commit();
 
         //TO BE CHECKED LATER!!!!!!!!!!!!
         bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
