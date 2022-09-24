@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+        <TextView
+            android:id="@+id/att_student_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:textSize="15sp"/>
+
+
+        <RadioGroup
+            android:id="@+id/att_rad_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignEnd="@+id/att_student_name"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/att_rad_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Present"/>
+            <RadioButton
+                android:id="@+id/att_rad_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Absent"
+                android:checked="true"
+                android:paddingRight="2dp"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

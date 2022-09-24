@@ -16,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.nazgul.attendancetracker.MainActivity;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.MenuActivities.TeacherMenu;
 
@@ -63,11 +64,16 @@ public class TeacherLogin extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             if(currentUser.getUid().startsWith("TCH")) {
-                startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
-                finish();
+                if(currentUser.isEmailVerified()) {
+                    startActivity(new Intent(TeacherLogin.this, TeacherMenu.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Please verify email.", Toast.LENGTH_SHORT).show();
+                }
             }
             else {
                 Toast.makeText(TeacherLogin.this, "No access...Leave..", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
             }
         }
     }
@@ -91,16 +97,17 @@ public class TeacherLogin extends AppCompatActivity {
                         }
                         else {
                             Toast.makeText(TeacherLogin.this, "No access.. Leave..", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
                         }
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(TeacherLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
                     }
-
-
                 } else {
                     Toast.makeText(TeacherLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                    mAuth.signOut();
                 }
             }
         });

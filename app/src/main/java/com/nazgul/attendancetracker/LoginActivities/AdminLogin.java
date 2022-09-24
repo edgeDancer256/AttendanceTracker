@@ -63,24 +63,15 @@ public class AdminLogin extends AppCompatActivity {
         //Check if user is already logged in. If yes, don't show login screen again
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-
-            fStore.collection("Users")
-                    .whereEqualTo("isAdmin", "0")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if(task.isSuccessful()) {
-                                for(QueryDocumentSnapshot doc : task.getResult()) {
-                                    if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                        startActivity(new Intent(AdminLogin.this, AdminMenu.class));
-                                        finish();
-                                    }
-                                    Log.d("TAG", doc.getId() + doc.getData().toString());
-                                }
-                            }
-                        }
-                    });
+            if(currentUser.getUid().startsWith("ADMIN")) {
+                if(currentUser.isEmailVerified()) {
+                    startActivity(new Intent(AdminLogin.this, AdminMenu.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Please verify email.", Toast.LENGTH_SHORT).show();
+                    mAuth.signOut();
+                }
+            }
         }
     }
 
@@ -97,32 +88,23 @@ public class AdminLogin extends AppCompatActivity {
                     //Check Email Verification
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                         //If email verified, check access level
-                        fStore.collection("Users")
-                                .whereEqualTo("isAdmin", "0")
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if(task.isSuccessful()) {
-                                            //If access OK, Send to Menu
-                                            for(QueryDocumentSnapshot doc : task.getResult()) {
-                                                if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().equals(doc.getId())) {
-                                                    startActivity(new Intent(AdminLogin.this, AdminMenu.class));
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(AdminLogin.this, "No Access", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
+                        if(mAuth.getCurrentUser().getUid().startsWith("ADMIN")) {
+                            Intent in = new Intent(AdminLogin.this, AdminMenu.class);
+                            startActivity(in);
+                            finish();
+                        } else {
+                            Toast.makeText(AdminLogin.this, "You aren't supposed to be here...Please leave..", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                        }
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(AdminLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
                     }
                 } else {
-                    Toast.makeText(AdminLogin.this, "Login unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminLogin.this, "Credentials Incorrect. Please check again.", Toast.LENGTH_SHORT).show();
+                    mAuth.signOut();
                 }
             }
         });

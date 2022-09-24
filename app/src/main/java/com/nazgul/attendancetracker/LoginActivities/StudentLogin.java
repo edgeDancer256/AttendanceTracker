@@ -63,10 +63,15 @@ public class StudentLogin extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             if(currentUser.getUid().startsWith("STD")) {
-                startActivity(new Intent(StudentLogin.this, StudentMenu.class));
-                finish();
+                if(currentUser.isEmailVerified()) {
+                    startActivity(new Intent(StudentLogin.this, StudentMenu.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Please verify email.", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(StudentLogin.this, "You aren't supposed to be here...Please leave..", Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
             }
         }
     }
@@ -84,21 +89,24 @@ public class StudentLogin extends AppCompatActivity {
                     //Check Email Verification
                     if(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                         //If email verified, check access level
-                        if(mAuth.getCurrentUser().getUid().startsWith("STD")) {
+                        if(Objects.requireNonNull(mAuth.getCurrentUser()).getUid().startsWith("STD")) {
                             startActivity(new Intent(StudentLogin.this, StudentMenu.class));
                             finish();
                         } else {
                             Toast.makeText(StudentLogin.this, "You aren't supposed to be here...Please leave..", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
                         }
                     } else {
                         //Send Verification Email
                         FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                         Toast.makeText(StudentLogin.this, "Please verify Email", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
                     }
                 } else {
                     Toast.makeText(StudentLogin.this, "Login unsuccessful. PLease check credentials", Toast.LENGTH_SHORT).show();
                     email.getText().clear();
                     password.getText().clear();
+                    mAuth.signOut();
                 }
             }
         });

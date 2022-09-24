@@ -73,19 +73,5 @@ public class Home extends Fragment {
                         .commit();
             }
         });
-
-
-        CardView cd3 = view.findViewById(R.id.file_retrieval);
-        cd3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new FileDisplay())
-                        .addToBackStack("tag")
-                        .commit();
-            }
-        });
     }
 }

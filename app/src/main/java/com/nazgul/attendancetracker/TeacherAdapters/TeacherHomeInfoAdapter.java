@@ -61,6 +61,8 @@ public class TeacherHomeInfoAdapter extends RecyclerView.Adapter<TeacherHomeInfo
                 TchClassInfo tchClassInfo = new TchClassInfo();
                 Bundle bundle = new Bundle();
                 bundle.putString("id", curr_item.getCourse_id());
+                bundle.putString("cid", curr_item.getCourse());
+                bundle.putString("sid", curr_item.getSemester());
                 tchClassInfo.setArguments(bundle);
                 aca.getSupportFragmentManager()
                         .beginTransaction()

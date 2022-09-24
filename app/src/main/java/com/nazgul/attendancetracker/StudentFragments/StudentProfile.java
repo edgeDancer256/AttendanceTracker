@@ -1,90 +1,172 @@
 package com.nazgul.attendancetracker.StudentFragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nazgul.attendancetracker.MainActivity;
 import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.R;
+import com.nazgul.attendancetracker.StudentInfoCards.StudentHomeCard;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudentProfile#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Objects;
+
 public class StudentProfile extends Fragment {
 
-    private FirebaseAuth mAuth;
+    //Credentials for server access
+    //edgeDancer
+    private static final String db_url = "http://192.168.0.105/att_tracker";
+    //l1ght
+    //private static final String db_url = "http://192.168.1.11/att_tracker";
+    //l1ght hotspot
+    //private static final String db_url = "http://192.168.39.104/att_tracker";
+    //College
+    //private static final String db_url = "http://192.168.0.140/att_tracker";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    TextView name;
+    TextView email;
+    TextView phone;
+    TextView class_name;
+    TextView sem;
+    Button change_password;
+    Button logout;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String s_name;
+    String s_email;
+    String s_phone;
+    String s_class_name;
+    String s_sem;
 
-    public StudentProfile() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentProfile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentProfile newInstance(String param1, String param2) {
-        StudentProfile fragment = new StudentProfile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mAuth = FirebaseAuth.getInstance();
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_student_profile, container, false);
+
+        name = v.findViewById(R.id.std_prof_name);
+        email = v.findViewById(R.id.std_prof_email);
+        phone = v.findViewById(R.id.std_prof_phone);
+        class_name = v.findViewById(R.id.std_prof_class);
+        sem = v.findViewById(R.id.std_prof_sem);
+        change_password = v.findViewById(R.id.std_prof_pass_change);
+        logout = v.findViewById(R.id.logout_student);
+
+        new GetProfile().execute(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+
+        return v;
     }
 
+
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-
-
-        Button b1 = view.findViewById(R.id.logout_student);
-        b1.setOnClickListener(new View.OnClickListener() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 mAuth.signOut();
                 startActivity(new Intent(StudentProfile.this.getActivity(), MainActivity.class));
+                requireActivity().finish();
             }
         });
+
+        change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.sendPasswordResetEmail(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()))
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getContext(), "Password reset email sent.\n Please check your spam/trash folder as well.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+    }
+
+    public class GetProfile extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String sid = params[0];
+
+            String query = "?sid=" + sid;
+
+            try {
+                URL url = new URL(db_url + "/students/profile.php" + query);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                StringBuffer sb = new StringBuffer();
+                String row;
+
+                while((row = br.readLine()) != null) {
+                    sb.append(row).append("\n");
+                    Log.d("tag", sb.toString());
+                }
+                br.close();
+                httpURLConnection.disconnect();
+                return sb.toString();
+            } catch(Exception e) {
+                Log.d("err_conn", e.toString());
+                return e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String res) {
+            try {
+                JSONArray jArray = new JSONArray(res);
+                JSONObject jObj = null;
+                for(int i = 0; i < jArray.length(); i++) {
+                    jObj = jArray.getJSONObject(i);
+                    String student_name = jObj.getString("student_name");
+                    String student_email = jObj.getString("student_email");
+                    String student_phone = jObj.getString("student_phone");
+                    String course = jObj.getString("student_course");
+                    String semester = jObj.getString("semester");
+
+                    s_name = (String) name.getText();
+                    name.setText(s_name + " " + student_name);
+
+                    s_email = (String) email.getText();
+                    email.setText(s_email + " " + student_email);
+
+                    s_phone = (String) phone.getText();
+                    phone.setText(s_phone + " " + student_phone);
+
+                    s_class_name = (String) class_name.getText();
+                    class_name.setText(s_class_name + " " + course);
+
+                    s_sem = (String) sem.getText();
+                    sem.setText(s_sem + " " + semester);
+                }
+
+            } catch(Exception e) {
+                Log.d("err_encode", e.getMessage());
+                Toast.makeText(getContext(), "Something went wrong...take a guess what...", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

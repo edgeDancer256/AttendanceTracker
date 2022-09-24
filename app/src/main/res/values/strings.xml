@@ -10,7 +10,7 @@
     <string name="teacher_activity">Teacher Login</string>
     <string name="student_activity">Student Login</string>
 
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="yes">Yes</string>
@@ -33,5 +33,7 @@
     <string name="upload_question_paper">Upload Question Paper</string>
     <string name="view_assignments">View Assignments</string>
     <string name="take_attendance">Take Attendance</string>
+    <string name="select_time">Select Time</string>
+    <string name="select_date">Select Date</string>
 
 </resources>

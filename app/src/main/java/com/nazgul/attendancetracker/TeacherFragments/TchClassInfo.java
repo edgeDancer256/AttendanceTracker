@@ -21,6 +21,8 @@ public class TchClassInfo extends Fragment {
     MaterialButton view_assignments;
     MaterialButton upload_qp;
     String class_id;
+    String course_name;
+    String sem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +30,8 @@ public class TchClassInfo extends Fragment {
 
         assert this.getArguments() != null;
         class_id = this.getArguments().getString("id");
+        course_name = this.getArguments().getString("cid");
+        sem = this.getArguments().getString("sid");
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_tch_class_info, container, false);
 
@@ -43,7 +47,19 @@ public class TchClassInfo extends Fragment {
         take_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Attendance attendance = new Attendance();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", class_id);
+                bundle.putString("cid", course_name);
+                bundle.putString("sid", sem);
+                attendance.setArguments(bundle);
 
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, attendance)
+                        .addToBackStack("tag")
+                        .commit();
             }
         });
 

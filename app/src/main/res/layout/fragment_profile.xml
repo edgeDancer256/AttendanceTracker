@@ -8,42 +8,91 @@
     tools:context=".MasterFragments.Profile">
 
     <!-- TODO: Update blank fragment layout -->
-
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_admin"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1.5:1"
         android:src="@drawable/profile_icon_foreground"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/admin_prof_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logout"
+    <TextView
+        android:id="@+id/admin_prof_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/logout"
+        android:text="Name : "
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/imageView_admin"
+        app:layout_constraintBottom_toTopOf="@id/admin_prof_email"
+        app:layout_constraintStart_toStartOf="@id/guideline_admin2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_admin3"/>
+
+    <TextView
+        android:id="@+id/admin_prof_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Email : "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/admin_prof_phone"
+        app:layout_constraintTop_toBottomOf="@id/admin_prof_name"
+        app:layout_constraintStart_toStartOf="@id/guideline_admin2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_admin3"/>
+
+    <TextView
+        android:id="@+id/admin_prof_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Phone : "
+        app:layout_constraintBottom_toTopOf="@id/admin_prof_pass_change"
+        app:layout_constraintTop_toBottomOf="@id/admin_prof_email"
+        app:layout_constraintStart_toStartOf="@id/guideline_admin2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_admin3"/>
+
+
+
+    <Button
+        android:id="@+id/admin_prof_pass_change"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/logout_admin"
+        app:layout_constraintTop_toBottomOf="@id/admin_prof_phone"
+        app:layout_constraintStart_toStartOf="@id/guideline_admin2"
+        app:layout_constraintEnd_toEndOf="@id/guideline_admin3"/>
+
+
+    <Button
+        android:id="@+id/logout_admin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_admin3"
+        app:layout_constraintStart_toStartOf="@id/guideline_admin2"
+        app:layout_constraintTop_toBottomOf="@id/admin_prof_pass_change" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline_admin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45" />
+        app:layout_constraintGuide_percent=".15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline_admin3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".55"/>
+        app:layout_constraintGuide_percent=".85"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
