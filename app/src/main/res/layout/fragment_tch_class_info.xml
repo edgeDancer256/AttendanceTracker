@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".TeacherFragments.TchClassInfo">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,9 +14,9 @@
             android:id="@+id/take_attendance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
             android:text="@string/take_attendance"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/blue_button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeColor="@color/black"
             app:cornerRadius="10dp"
@@ -31,11 +30,11 @@
             android:id="@+id/view_assignments"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/blue_button"
             android:text="@string/view_assignments"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeColor="@color/black"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:cornerRadius="10dp"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
@@ -47,11 +46,11 @@
             android:id="@+id/upload_qp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/blue_button"
             android:text="@string/upload_question_paper"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeColor="@color/black"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:cornerRadius="10dp"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"

@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StudentFragments.StudentAssignment">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -53,7 +52,7 @@
             app:layout_constraintBottom_toTopOf="@id/student_upload"
             android:text="Select File"
             android:textSize="15sp"
-            android:shadowColor="@color/blue_button"/>
+            android:backgroundTint="@color/blue_button"/>
 
         <Button
             android:id="@+id/student_upload"
@@ -63,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="@id/student_assignmentGld2"
             app:layout_constraintTop_toBottomOf="@id/student_select"
             app:layout_constraintBottom_toBottomOf="parent"
-
+            android:backgroundTint="@color/blue_button"
             android:text="Upload File"
             android:textSize="15sp"/>
 

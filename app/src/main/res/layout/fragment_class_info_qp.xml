@@ -7,8 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MasterFragments.ClassInfoQp">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cd1"
         app:layout_constraintTop_toTopOf="parent"

@@ -102,6 +102,7 @@ public class StudentAssignment extends Fragment {
                 pd.dismiss();
             }
         });
+        filename.setText("");
     }
 
     @SuppressLint("Range")

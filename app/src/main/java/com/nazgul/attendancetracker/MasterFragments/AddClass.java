@@ -102,11 +102,21 @@ public class AddClass extends Fragment {
                 subject = class_subject.getText().toString().trim();
                 teacher_id = class_teacher_id.getText().toString().trim();
 
-                ClassList cl = new ClassList();
+                if(course_id.startsWith(cName) && teacher_id.startsWith("TCH")) {
+                    ClassList cl = new ClassList();
 
-                cl.new InsertClass().execute("/admin/add_class.php", course_id, cName, semester, subject, teacher_id);
+                    cl.new InsertClass().execute("/admin/add_class.php", course_id, cName, semester, subject, teacher_id);
 
-                requireActivity().getSupportFragmentManager().popBackStack();
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    class_id.setText("");
+                    class_teacher_id.setText("");
+                    class_subject.setText("");
+                    Toast.makeText(getContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
+                    class_id.requestFocus();
+                }
+
+
             }
         });
 

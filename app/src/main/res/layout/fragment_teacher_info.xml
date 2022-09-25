@@ -9,7 +9,6 @@
     android:foreground="?android:attr/selectableItemBackground"
     tools:context=".MasterFragments.TeacherInfo">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

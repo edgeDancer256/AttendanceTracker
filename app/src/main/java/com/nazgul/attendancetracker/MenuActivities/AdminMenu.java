@@ -66,20 +66,5 @@ public class AdminMenu extends AppCompatActivity {
 
         //Load home fragment by default
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
-
-
-        //TO BE CHECKED LATER!!!!!!!!!!!!
-        bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if (i3 > 0 && bottomNavigationView.isShown()) {
-                    bottomNavigationView.setVisibility(View.GONE);
-                } else if (i3 < 0) {
-                    bottomNavigationView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
-
-
 }

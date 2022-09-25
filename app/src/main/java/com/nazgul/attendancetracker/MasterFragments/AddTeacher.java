@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.nazgul.attendancetracker.R;
 
+import java.util.regex.Pattern;
+
 
 public class AddTeacher extends Fragment {
 
@@ -60,13 +62,45 @@ public class AddTeacher extends Fragment {
                 teacherPhone = teacher_phone.getText().toString().trim();
                 teacherDept = teacher_dept.getText().toString().trim();
 
-                MasterTeachers mt = new MasterTeachers();
+                if(teacherID.startsWith("TCH") && isEmail(teacherEmail) && isPhone(teacherPhone)) {
+                    MasterTeachers mt = new MasterTeachers();
 
-                mt.new AddTeacherFirebase().execute(teacherID, teacherName, teacherEmail, teacherPhone, teacherDept);
+                    mt.new AddTeacherFirebase().execute(teacherID, teacherName, teacherEmail, teacherPhone, teacherDept);
 
-                requireActivity().getSupportFragmentManager().popBackStack();
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    teacher_id.setText("");
+                    teacher_name.setText("");
+                    teacher_email.setText("");
+                    teacher_phone.setText("");
+                    teacher_dept.setText("");
+                    Toast.makeText(getContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
+                    teacher_id.requestFocus();
+                }
+
+
             }
         });
+    }
 
+
+    public static boolean isEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
+    public static boolean isPhone(String phone) {
+        String phRegex = "^[6-9]+d{9}";
+        Pattern pattern = Pattern.compile(phRegex);
+        if(phone == null)
+            return false;
+        return pattern.matcher(phone).matches();
     }
 }

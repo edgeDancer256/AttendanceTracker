@@ -104,6 +104,7 @@ public class ClassInfoQp extends Fragment {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(String res) {
             try {
@@ -126,6 +127,7 @@ public class ClassInfoQp extends Fragment {
             }
         }
     }
+
 
     private class GetQP extends AsyncTask<String, Void, String> {
         @Override

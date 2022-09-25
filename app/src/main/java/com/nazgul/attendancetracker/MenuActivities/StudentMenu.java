@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ import com.nazgul.attendancetracker.StudentFragments.StudentNotif;
 import com.nazgul.attendancetracker.StudentFragments.StudentProfile;
 import com.nazgul.attendancetracker.StudentFragments.StudentReport;
 
+import java.util.Objects;
+
 public class StudentMenu extends AppCompatActivity {
 
     //Bottom nav bar
@@ -36,7 +39,8 @@ public class StudentMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_menu);
 
-        String uid = mAuth.getCurrentUser().getUid();
+        String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
 
         Bundle bundle = new Bundle();
         bundle.putString("uid", uid);
@@ -46,6 +50,7 @@ public class StudentMenu extends AppCompatActivity {
 
         //Item select listener for the bottom nav bar
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
@@ -66,7 +71,10 @@ public class StudentMenu extends AppCompatActivity {
                 if(selectFragment != null) {
                     //Inflate selected fragment
                     selectFragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectFragment).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, selectFragment)
+                            .commit();
                 }
 
                 return true;
@@ -76,18 +84,9 @@ public class StudentMenu extends AppCompatActivity {
         //Load home fragment by default
         StudentHome sh = new StudentHome();
         sh.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, sh).commit();
-
-        //TO BE CHECKED LATER!!!!!!!!!!!!
-        bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if(i3 > 0 && bottomNavigationView.isShown()) {
-                    bottomNavigationView.setVisibility(View.GONE);
-                } else if(i3 < 0) {
-                    bottomNavigationView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, sh)
+                .commit();
     }
 }

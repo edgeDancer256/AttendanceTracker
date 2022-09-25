@@ -21,6 +21,7 @@ import com.nazgul.attendancetracker.R;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import kotlin.collections.ArrayDeque;
 
@@ -98,11 +99,41 @@ public class AddStudent extends Fragment {
                 studentEmail = student_email.getText().toString().trim();
                 studentPhone = student_phone.getText().toString().trim();
 
-                StudentList sl = new StudentList();
-                sl.new AddStudentFirebase().execute(studentID, studentName, studentEmail, studentPhone, course, semester);
-
-                requireActivity().getSupportFragmentManager().popBackStack();
+                if(studentID.startsWith("STD") && isEmail(studentEmail) && isPhone(studentPhone)) {
+                    StudentList sl = new StudentList();
+                    sl.new AddStudentFirebase().execute(studentID, studentName, studentEmail, studentPhone, course, semester);
+                    requireActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    student_id.setText("");
+                    student_name.setText("");
+                    student_email.setText("");
+                    student_phone.setText("");
+                    Toast.makeText(getContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
+                    student_id.requestFocus();
+                }
             }
         });
     }
+
+
+    public static boolean isEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
+    public static boolean isPhone(String phone) {
+        String phRegex = "^[6-9]+d{9}";
+        Pattern pattern = Pattern.compile(phRegex);
+        if(phone == null)
+            return false;
+        return pattern.matcher(phone).matches();
+    }
+
 }

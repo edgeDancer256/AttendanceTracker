@@ -74,17 +74,5 @@ public class TeacherMenu extends AppCompatActivity {
         TeacherHome th = new TeacherHome();
         th.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, th).commit();
-
-        //TO BE CHECKED LATER!!!!!!!!!!!!
-        bottomNavigationView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if(i3 > 0 && bottomNavigationView.isShown()) {
-                    bottomNavigationView.setVisibility(View.GONE);
-                } else if(i3 < 0) {
-                    bottomNavigationView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 }

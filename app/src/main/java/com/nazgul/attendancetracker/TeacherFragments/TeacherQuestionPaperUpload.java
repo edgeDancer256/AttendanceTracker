@@ -103,6 +103,7 @@ public class TeacherQuestionPaperUpload extends Fragment {
                 pd.dismiss();
             }
         });
+        filename.setText("");
     }
 
     @SuppressLint("Range")

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".TeacherFragments.TeacherProfile">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/imageView_tch"
         android:layout_width="0dp"
@@ -74,6 +73,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Change Password"
+        android:backgroundTint="@color/blue_button"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/logout_tch"
         app:layout_constraintTop_toBottomOf="@id/tch_prof_dept"
@@ -86,6 +86,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Logout"
+        android:backgroundTint="@color/blue_button"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_tch3"
