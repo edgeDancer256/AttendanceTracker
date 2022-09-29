@@ -10,12 +10,14 @@ public class StudentHomeCard {
     private String course;
     private String semester;
     private String course_id;
+    private String subject;
 
-    public StudentHomeCard(String info, String course, String semester, String course_id) {
+    public StudentHomeCard(String info, String course, String semester, String course_id, String subject) {
         this.info = info;
         this.course = course;
         this.semester = semester;
         this.course_id = course_id;
+        this.subject = subject;
     }
 
     public String getInfo() {
@@ -32,5 +34,9 @@ public class StudentHomeCard {
 
     public String getCourse_id() {
         return course_id;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 }

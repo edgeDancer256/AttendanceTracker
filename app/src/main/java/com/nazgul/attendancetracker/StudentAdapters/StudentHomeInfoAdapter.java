@@ -62,6 +62,7 @@ public class StudentHomeInfoAdapter extends RecyclerView.Adapter<StudentHomeInfo
                 StudentHomeInfo studentHomeInfo = new StudentHomeInfo();
                 Bundle bundle = new Bundle();
                 bundle.putString("id", curr_item.getCourse_id());
+                bundle.putString("class", curr_item.getSubject());
                 studentHomeInfo.setArguments(bundle);
                 aca.getSupportFragmentManager()
                         .beginTransaction()

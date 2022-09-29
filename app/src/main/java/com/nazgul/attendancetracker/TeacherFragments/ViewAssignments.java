@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nazgul.attendancetracker.AdminInfoCards.FileCard;
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.MasterAdapters.FileInfoAdapter;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.TeacherAdapters.AssignmentInfoAdapter;
@@ -31,15 +32,7 @@ import java.util.ArrayList;
 
 public class ViewAssignments extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
+    String db_url;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
@@ -52,6 +45,8 @@ public class ViewAssignments extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db_url = new DbUrl().getUrl();
+
         assert this.getArguments() != null;
         id = this.getArguments().getString("id");
         // Inflate the layout for this fragment

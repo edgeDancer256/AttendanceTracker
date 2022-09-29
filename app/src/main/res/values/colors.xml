@@ -11,4 +11,6 @@
     <color name="blue_title">#121942</color>
     <color name="status_bar">#FF000000</color>
     <color name="blue_button">#3450DD</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="screen_background">#ACDDDE</color>
 </resources>

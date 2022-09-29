@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.MainActivity;
 import com.nazgul.attendancetracker.MasterFragments.Profile;
 import com.nazgul.attendancetracker.R;
@@ -36,15 +37,7 @@ import java.util.Objects;
 
 public class StudentProfile extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
+    String db_url;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     TextView name;
@@ -65,6 +58,8 @@ public class StudentProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db_url = new DbUrl().getUrl();
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_student_profile, container, false);
 

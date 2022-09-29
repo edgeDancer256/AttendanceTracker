@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="45dp"
+    android:background="@drawable/back5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".TeacherFragments.TeacherQuestionPaperUpload">
 
@@ -35,8 +37,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/addfileGld1"
             app:layout_constraintEnd_toEndOf="@id/addfileGld2"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:hint="File Name"
+            android:textColorHint="@color/white"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/FileImg"
             app:layout_constraintBottom_toTopOf="@id/btn_select"/>

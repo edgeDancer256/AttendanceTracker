@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:padding="45dp"
+    android:background="@drawable/back"
     tools:context=".TeacherFragments.Attendance">
 
     <androidx.cardview.widget.CardView

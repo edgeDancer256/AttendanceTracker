@@ -18,6 +18,8 @@ import com.nazgul.attendancetracker.TeacherFragments.TeacherNotif;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherProfile;
 import com.nazgul.attendancetracker.TeacherFragments.TeacherReport;
 
+import java.util.Objects;
+
 public class TeacherMenu extends AppCompatActivity {
 
     //Bottom nav bar
@@ -32,7 +34,7 @@ public class TeacherMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_menu);
 
-        String uid = mAuth.getCurrentUser().getUid();
+        String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         Bundle bundle = new Bundle();
         bundle.putString("uid", uid);

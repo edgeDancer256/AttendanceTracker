@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.StudentAdapters.StudentHomeInfoAdapter;
 import com.nazgul.attendancetracker.StudentInfoCards.StudentHomeCard;
@@ -34,15 +35,7 @@ import java.util.ArrayList;
 
 public class StudentHome extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
+    String db_url;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -53,6 +46,7 @@ public class StudentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db_url = new DbUrl().getUrl();
 
         assert this.getArguments() != null;
         String uid = this.getArguments().getString("uid");
@@ -111,7 +105,7 @@ public class StudentHome extends Fragment {
 
                     String result = "\nSubject : " + subject + "\n";
 
-                    studentHomeCardArrayList.add(new StudentHomeCard(result, course, semester,course_id));
+                    studentHomeCardArrayList.add(new StudentHomeCard(result, course, semester,course_id, subject));
                 }
             } catch(Exception e) {
                 Log.d("err_encode", e.getMessage());

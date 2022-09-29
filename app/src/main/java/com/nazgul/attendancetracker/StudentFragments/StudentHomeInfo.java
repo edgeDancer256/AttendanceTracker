@@ -19,12 +19,14 @@ public class StudentHomeInfo extends Fragment {
     MaterialButton attendance;
     MaterialButton assignment;
     String c_id;
+    String c_name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         assert this.getArguments() != null;
         c_id = this.getArguments().getString("id");
+        c_name = this.getArguments().getString("class");
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_student_home_info, container, false);
 
@@ -48,6 +50,23 @@ public class StudentHomeInfo extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, studentAssignment)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StudentReportDaily studentReportDaily = new StudentReportDaily();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", c_id);
+                bundle.putString("class", c_name);
+                studentReportDaily.setArguments(bundle);
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, studentReportDaily)
                         .addToBackStack("tag")
                         .commit();
             }

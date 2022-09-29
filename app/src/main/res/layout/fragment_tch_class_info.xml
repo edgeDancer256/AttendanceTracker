@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="50dp"
+    android:background="@drawable/back20"
     tools:context=".TeacherFragments.TchClassInfo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,8 +25,24 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
             app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
-            app:layout_constraintBottom_toTopOf="@id/view_assignments"
+            app:layout_constraintBottom_toTopOf="@id/view_attendance"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/view_attendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="View Attendance"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/black"
+            app:cornerRadius="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
+            app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
+            app:layout_constraintTop_toBottomOf="@id/take_attendance"
+            app:layout_constraintBottom_toTopOf="@id/view_assignments"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/view_assignments"
@@ -40,7 +58,7 @@
             app:layout_constraintStart_toStartOf="@id/tch_class_info_gld1"
             app:layout_constraintEnd_toEndOf="@id/tch_class_info_gld2"
             app:layout_constraintBottom_toTopOf="@id/upload_qp"
-            app:layout_constraintTop_toBottomOf="@id/take_attendance" />
+            app:layout_constraintTop_toBottomOf="@id/view_attendance" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/upload_qp"

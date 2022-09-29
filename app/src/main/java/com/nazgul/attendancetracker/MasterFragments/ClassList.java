@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.MasterAdapters.ClassInfoAdapter;
 import com.nazgul.attendancetracker.AdminInfoCards.ClassInfoCard;
 import com.nazgul.attendancetracker.R;
@@ -35,15 +36,7 @@ import java.util.ArrayList;
 
 public class ClassList extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
+    String db_url;
 
     RecyclerView recView;
     RecyclerView.Adapter recAdapter;
@@ -66,6 +59,8 @@ public class ClassList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        db_url = new DbUrl().getUrl();
         // Inflate the layout for this fragment
 
         //Asserting existence of arguments and retrieving them
@@ -73,10 +68,6 @@ public class ClassList extends Fragment {
         cName = this.getArguments().getString("course");
 
         View v = inflater.inflate(R.layout.fragment_class_list, container, false);
-        Context context = container.getContext();
-
-        LinearLayout.LayoutParams layparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 180);
-        layparams.setMargins(10, 10, 10, 100);
 
         recView = v.findViewById(R.id.recycle1);
         recLayout = new LinearLayoutManager(getContext());

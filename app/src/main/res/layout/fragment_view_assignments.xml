@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="50dp"
+    android:background="@drawable/back19"
     tools:context=".TeacherFragments.ViewAssignments">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assign_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
         android:padding="5dp"/>
 
 </FrameLayout>

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.MasterAdapters.StudentInfoAdapter;
 import com.nazgul.attendancetracker.AdminInfoCards.StudentInfoCard;
@@ -34,16 +35,7 @@ import java.util.ArrayList;
 
 public class StudentList extends Fragment {
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
-
+    String db_url;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -66,6 +58,8 @@ public class StudentList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db_url = new DbUrl().getUrl();
+
         //Assert existence of argument bundle
         assert this.getArguments() != null;
         course = this.getArguments().getString("course");

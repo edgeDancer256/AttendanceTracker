@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="45dp"
+    android:background="@drawable/back11"
     android:paddingTop="20dp"
     tools:context=".TeacherFragments.TeacherHome">
 
@@ -11,6 +13,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/teacher_menu"
         android:layout_width="match_parent"
+        android:backgroundTint="@color/transparent"
         android:padding="11dp"
         android:layout_height="match_parent"/>
 

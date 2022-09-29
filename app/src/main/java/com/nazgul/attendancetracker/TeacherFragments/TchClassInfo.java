@@ -18,6 +18,7 @@ import com.nazgul.attendancetracker.R;
 public class TchClassInfo extends Fragment {
 
     MaterialButton take_attendance;
+    MaterialButton view_attendance;
     MaterialButton view_assignments;
     MaterialButton upload_qp;
     String class_id;
@@ -36,6 +37,7 @@ public class TchClassInfo extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tch_class_info, container, false);
 
         take_attendance = v.findViewById(R.id.take_attendance);
+        view_attendance = v.findViewById(R.id.view_attendance);
         view_assignments = v.findViewById(R.id.view_assignments);
         upload_qp = v.findViewById(R.id.upload_qp);
 
@@ -58,6 +60,25 @@ public class TchClassInfo extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, attendance)
+                        .addToBackStack("tag")
+                        .commit();
+            }
+        });
+
+        view_attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewDailyReport viewDailyReport = new ViewDailyReport();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", class_id);
+                bundle.putString("cid", course_name);
+                bundle.putString("sid", sem);
+                viewDailyReport.setArguments(bundle);
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, viewDailyReport)
                         .addToBackStack("tag")
                         .commit();
             }

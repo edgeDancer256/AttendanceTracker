@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.MasterFragments.StudentInfo;
 import com.nazgul.attendancetracker.R;
 import com.nazgul.attendancetracker.AdminInfoCards.StudentInfoCard;
@@ -33,15 +34,7 @@ import java.util.ArrayList;
  */
 public class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.StudentInfoViewHolder> {
 
-    //Credentials for server access
-    //edgeDancer
-    //private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
+    String db_url = new DbUrl().getUrl();
 
     Context context;
     private ArrayList<StudentInfoCard> studentInfoCardArrayList;

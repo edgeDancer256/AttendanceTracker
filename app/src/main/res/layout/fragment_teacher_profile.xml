@@ -5,6 +5,8 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="35dp"
+    android:background="@drawable/back15"
     tools:context=".TeacherFragments.TeacherProfile">
 
     <ImageView

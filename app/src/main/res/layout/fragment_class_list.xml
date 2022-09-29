@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
+    android:background="@drawable/back15"
     android:fillViewport="true"
     tools:context=".MasterFragments.ClassList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle1"
+        android:backgroundTint="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"

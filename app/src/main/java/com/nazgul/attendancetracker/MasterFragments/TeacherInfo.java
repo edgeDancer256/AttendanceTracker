@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.R;
 
 import org.json.JSONArray;
@@ -27,24 +28,16 @@ import java.util.ArrayList;
 
 
 public class TeacherInfo extends Fragment {
+    String db_url;
 
-    //Credentials for server access
-    //edgeDancer
-    private static final String db_url = "http://192.168.0.105/att_tracker";
-    //l1ght
-    //private static final String db_url = "http://192.168.1.11/att_tracker";
-    //l1ght hotspot
-    //private static final String db_url = "http://192.168.39.104/att_tracker";
-    //College
-    //private static final String db_url = "http://192.168.0.140/att_tracker";
-
-   String teacherID;
-   TextView data;
-   ListView classList;
+    String teacherID;
+    TextView data;
+    ListView classList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db_url = new DbUrl().getUrl();
 
         assert this.getArguments() != null;
         teacherID = this.getArguments().getString("teacher_id");
@@ -178,7 +171,9 @@ public class TeacherInfo extends Fragment {
             } catch(Exception e) {
                 class_list.add("No classes are handled by this teacher yet");
             }
-            ArrayAdapter<String> ap = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, class_list);
+            ArrayAdapter<String> ap = new ArrayAdapter<>(getContext(),
+                    android.R.layout.simple_list_item_1,
+                    class_list);
 
             classList.setAdapter(ap);
         }

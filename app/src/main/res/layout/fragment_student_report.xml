@@ -5,16 +5,46 @@
     android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentFragments.StudentReport">
+    android:padding="45dp"
+    tools:context=".StudentFragments.StudentReport"
+    android:background="@drawable/back10">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/std_rep_cd1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/report_icon_foreground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/std_rep_cd2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="15dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="Attendance Report"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="30sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/std_rep_cd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/std_rep_cd1"
+        app:cardCornerRadius="15dp"
+        android:padding="15dp">
+
+        <ListView
+            android:id="@+id/student_report_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:clickable="false"/>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,7 +64,7 @@ public class Home extends Fragment {
         cd1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Send to MasterClasses
+                //Send to MasterStudents
                 requireActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()

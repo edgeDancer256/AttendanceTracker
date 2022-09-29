@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="70dp"
+    android:orientation="vertical"
+    tools:context=".StudentFragments.StudentReportDaily"
+    android:background="@drawable/back8">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/date_select_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/daily_info_card">
+
+        <TextView
+            android:id="@+id/daily_select_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Select Date"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/daily_info_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="true"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/date_select_card"
+        app:layout_constraintBottom_toTopOf="@id/daily_info_submit">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/daily_info_class_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Class Name" />
+
+            <ListView
+                android:id="@+id/daily_info_class_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/daily_info_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_button"
+        app:cornerRadius="10dp"
+        android:text="Get Info"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/daily_info_card"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
