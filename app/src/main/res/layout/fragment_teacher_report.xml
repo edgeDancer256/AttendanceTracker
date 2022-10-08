@@ -20,13 +20,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="Report"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:fontFamily="sans-serif-condensed-medium"
-            android:textSize="30sp"/>
+            android:textSize="30sp"/>        
 
     </androidx.cardview.widget.CardView>
 
@@ -41,10 +41,20 @@
         <ListView
             android:id="@+id/teacher_report_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="10dp"
             android:clickable="false"/>
 
     </androidx.cardview.widget.CardView>
+    
+    <org.eazegraph.lib.charts.PieChart
+        android:id="@+id/tch_report_pie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tch_rep_cd2"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

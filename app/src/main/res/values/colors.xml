@@ -13,4 +13,7 @@
     <color name="blue_button">#3450DD</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="screen_background">#ACDDDE</color>
+
+    <color name="present">#FFA726</color>
+    <color name="absent">#66BB6A</color>
 </resources>

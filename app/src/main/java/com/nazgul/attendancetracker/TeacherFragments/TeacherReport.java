@@ -1,10 +1,14 @@
 package com.nazgul.attendancetracker.TeacherFragments;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,9 @@ import android.widget.ListView;
 import com.nazgul.attendancetracker.DbUrl;
 import com.nazgul.attendancetracker.R;
 
+import org.eazegraph.lib.charts.BarChart;
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +39,8 @@ public class TeacherReport extends Fragment {
     String tid;
     ListView report;
 
+    PieChart pieChart;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +53,7 @@ public class TeacherReport extends Fragment {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_teacher_report, container, false);
         report = v.findViewById(R.id.teacher_report_list);
+        pieChart = v.findViewById(R.id.tch_report_pie);
 
         new GetTeacherReport().execute(tid);
 
@@ -97,13 +107,35 @@ public class TeacherReport extends Fragment {
                     if(tot_class != 0) {
                         att_perc_p = (Integer.parseInt(present) / ((float)tot_class) / Integer.parseInt(count)) * 100;
                         att_perc_a = 100 - att_perc_p;
+
+                        int pie_p = Integer.parseInt(String.valueOf(new DecimalFormat("#").format(att_perc_p)));
+                        int pie_a = Integer.parseInt(String.valueOf(new DecimalFormat("#").format(att_perc_a)));
+
+                        pieChart.addPieSlice(new PieModel("Absent",
+                                pie_a,
+                                Color.parseColor("#66BB6A")));
+
+                        pieChart.addPieSlice(new PieModel("Present",
+                                pie_p,
+                                Color.parseColor("#FFA726")));
                     }
+
+
+                    String pres = "\nPresent % : " + new DecimalFormat("#.##").format(att_perc_p);
+                    String abs = "\nAbsent % : " + new DecimalFormat("#.##").format(att_perc_a);
+
+                    Spannable spannable = new SpannableString(pres);
+                    spannable.setSpan(Color.parseColor("#FFA726"), pres.length(),pres.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    Spannable spannable1 = new SpannableString(abs);
+                    spannable1.setSpan(Color.parseColor("#66BB6A"), abs.length(),abs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
                     String result = "\nSubject : " + subject
                             + "\nNo. of students : " + count
                             + "\nTotal classes conducted : " + tot_class
-                            + "\nPresent % : " + new DecimalFormat("#.##").format(att_perc_p)
-                            + "\nAbsent % : " + new DecimalFormat("#.##").format(att_perc_a) + "\n";
+                            + pres + abs + "\n";
+
                     att_report.add(result);
                     Log.d("res", result);
                 }

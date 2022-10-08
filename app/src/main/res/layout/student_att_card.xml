@@ -32,13 +32,13 @@
                 android:id="@+id/att_rad_p"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Present"/>
             <RadioButton
                 android:id="@+id/att_rad_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Absent"
-                android:checked="true"
                 android:paddingRight="2dp"/>
 
         </RadioGroup>

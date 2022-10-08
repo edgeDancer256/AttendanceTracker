@@ -7,7 +7,7 @@ package com.nazgul.attendancetracker;
  */
 public class DbUrl {
 
-    private String url = "http://192.168.0.105/att_tracker";
+    private String url = "http://192.168.0.142/att_tracker";
 
 
     public String getUrl() {

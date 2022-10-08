@@ -227,7 +227,7 @@ public class Attendance extends Fragment {
                     jObj = jArray.getJSONObject(i);
                     String student_name = jObj.getString("student_name");
                     String student_id = jObj.getString("student_id");
-                    studentAttInfos.add(new StudentAttInfo(student_name, "Absent", student_id));
+                    studentAttInfos.add(new StudentAttInfo(student_name, "Present", student_id));
                 }
 
                 adapter = new AttendanceInfoAdapter(studentAttInfos);

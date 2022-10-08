@@ -111,7 +111,7 @@ public class StudentReportDaily extends Fragment {
             @Override
             public void onClick(View view) {
                 if(Objects.equals(date, "Select Date")) {
-                    Toast.makeText(getContext(), "Please select dsate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please select date", Toast.LENGTH_SHORT).show();
                 } else {
                     new GetAttInfo().execute(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(),
                             c_id,
